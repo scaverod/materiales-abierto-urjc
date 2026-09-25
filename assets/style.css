@@ -364,3 +364,5 @@ details > div p:first-child { margin-top: 0; }
   .lock, .lock-scene, .halo, .orbit, .chip-float, .lock-shadow { animation: none; }
   .spark { display: none; }
 }
+.deadline .count a { color: inherit; }
+.deadline-link { display: inline-block; margin-top: 8px; font-size: .88rem; font-weight: 700; }

@@ -983,3 +983,7 @@ De inmediato, crear la asignatura en abierto en el aula virtual, sin datos perso
 - Ejemplo de libro único: Estructuras de Datos
 - Listado de mentores
 - Dudas: ofilibre@urjc.es
+
+## Enlace directo al formulario de solicitud
+
+La solicitud se presenta en la sede electrónica, en este enlace directo a la convocatoria (incluye la documentación y un manual de usuario): https://sede.urjc.es/web/guest/convocatorias?p_p_id=es_tangrambpm_liferay_BpmPortlet_INSTANCE_514ikmouN9nu&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_es_tangrambpm_liferay_BpmPortlet_INSTANCE_514ikmouN9nu_id=FWg5q31000-1rRnH
