@@ -16,6 +16,10 @@
     ["faq.html", "Dudas"],
   ];
 
+  // Enlace público al cuaderno de NotebookLM ("Pregunta a la convocatoria").
+  // Mientras esté vacío, el botón no se muestra.
+  const NOTEBOOK_URL = "";
+
   function safeGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
   function safeSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
   window.store = { get: safeGet, set: safeSet };
@@ -100,6 +104,16 @@
         <p class="credits">Desarrollado por <a href="https://servicios.urjc.es/pdi/ver/sergio.cavero">Sergio Cavero</a>
           y <span class="claudia-name" title="Claudia = Claude 😉">${CLAUDIA}Claudia</span></p>
       </div>`;
+  }
+
+  // Botón flotante del asistente
+  if (NOTEBOOK_URL) {
+    const fab = document.createElement("a");
+    fab.className = "ask-fab"; fab.href = NOTEBOOK_URL; fab.target = "_blank"; fab.rel = "noopener";
+    fab.innerHTML = `<span aria-hidden="true">✨</span> Pregunta a la convocatoria`;
+    fab.title = "Asistente con IA (NotebookLM) que responde citando la convocatoria. No oficial. No escribas datos personales.";
+    document.body.appendChild(fab);
+    document.querySelectorAll("[data-ask]").forEach(el => { el.href = NOTEBOOK_URL; el.hidden = false; });
   }
 
   // Toast

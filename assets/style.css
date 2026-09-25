@@ -290,3 +290,11 @@ details > div p:first-child { margin-top: 0; }
 .ics-card { margin: 18px 0; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 20px; }
 .ics-card > div:first-child { flex: 1 1 320px; }
 .saved-note { font-size: .88rem; color: var(--muted); background: var(--ok-soft); border-radius: 8px; padding: 8px 12px; margin: 10px 0 0; }
+
+/* Botón flotante del asistente */
+.ask-fab { position: fixed; right: 18px; bottom: 18px; z-index: 40; display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 18px; border-radius: 99px; background: var(--accent); color: #fff; font-weight: 700; font-size: .95rem;
+  text-decoration: none; box-shadow: 0 6px 20px rgba(0,0,0,.2); }
+.ask-fab:hover { filter: brightness(1.08); }
+@media (max-width: 520px) { .ask-fab { right: 12px; bottom: 12px; padding: 11px 15px; font-size: .9rem; } }
+@media print { .ask-fab { display: none; } }
