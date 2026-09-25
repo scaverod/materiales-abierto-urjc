@@ -18,7 +18,7 @@
 
   // Enlace público al cuaderno de NotebookLM ("Pregunta a la convocatoria").
   // Mientras esté vacío, el botón no se muestra.
-  const NOTEBOOK_URL = "";
+  const NOTEBOOK_URL = "https://notebook.google.com/notebook/cfd9a58d-4a3c-4fe8-9237-0a789cf68e04/preview";
 
   function safeGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
   function safeSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }

@@ -39,6 +39,7 @@ Una web estática que reúne en un solo sitio todo lo que hay que hacer en la co
 | 📝 | [**Textos listos**](https://scaverod.github.io/materiales-abierto-urjc/textos.html) | Generador de la nota de copyright, los metadatos, el `datos.tex`, el Anexo V, la declaración de IA y los textos del formulario. |
 | 🗓 | [**Calendario**](https://scaverod.github.io/materiales-abierto-urjc/calendario.html) | Plan de trabajo recomendado y exportación de las fechas límite a tu calendario (`.ics`). |
 | 🤝 | [**Mentores**](https://scaverod.github.io/materiales-abierto-urjc/mentores.html) | Buscador por centro y área, con contacto directo y copia a OfiLibre. |
+| ✨ | [**Pregunta a la convocatoria**](https://notebook.google.com/notebook/cfd9a58d-4a3c-4fe8-9237-0a789cf68e04/preview) | Asistente con IA (NotebookLM) que responde citando la convocatoria. Requiere cuenta de Google. Fuentes en [`notebooklm/`](notebooklm). |
 | ❓ | [**Dudas**](https://scaverod.github.io/materiales-abierto-urjc/faq.html) | Preguntas frecuentes con buscador y filtros, y todos los enlaces oficiales. |
 
 <table>
