@@ -27,7 +27,7 @@ Ya está abierto
 Fin del plazo de solicitud (1.º y 2.º cuatrimestre)
 18 ene 2027 · 23:59
 
- La regla de oro: BURJC Digital te da el handle en cuanto envías el depósito, pero después la biblioteca lo revisa y puede pedirte cambios o rechazarlo. Solo se garantiza la tramitación de lo subido hasta el 15 de enero. Tu fecha real es mediados de diciembre, no el 18 de enero.
+ Ten en cuenta: BURJC Digital te da el handle en cuanto envías el depósito, pero después la biblioteca lo revisa y puede pedirte cambios o rechazarlo. Solo se garantiza la tramitación de lo subido hasta el 15 de enero. Tu fecha real es mediados de diciembre, no el 18 de enero.
 
 ## Qué cambia respecto a convocatorias anteriores
 

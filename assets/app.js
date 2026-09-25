@@ -16,7 +16,7 @@
     ["faq.html", "Dudas"],
   ];
 
-  // Enlace público al cuaderno de NotebookLM ("Pregunta a la convocatoria").
+  // Enlace público al cuaderno de NotebookLM ("Pregunta a nuestro chatbot").
   // Mientras esté vacío, el botón no se muestra.
   const NOTEBOOK_URL = "https://notebook.google.com/notebook/cfd9a58d-4a3c-4fe8-9237-0a789cf68e04/preview";
 
@@ -110,7 +110,7 @@
   if (NOTEBOOK_URL) {
     const fab = document.createElement("a");
     fab.className = "ask-fab"; fab.href = NOTEBOOK_URL; fab.target = "_blank"; fab.rel = "noopener";
-    fab.innerHTML = `<span aria-hidden="true">✨</span> Pregunta a la convocatoria`;
+    fab.innerHTML = `<span aria-hidden="true">✨</span> Pregunta a nuestro chatbot`;
     fab.title = "Asistente con IA (NotebookLM) que responde citando la convocatoria. No oficial. No escribas datos personales.";
     document.body.appendChild(fab);
     document.querySelectorAll("[data-ask]").forEach(el => { el.href = NOTEBOOK_URL; el.hidden = false; });
