@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Subir vídeos a TV URJC</title>
+<meta name="description" content="Guía paso a paso para publicar vídeos y audios en TV URJC para la convocatoria de materiales en abierto 2026-2027.">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header id="site-header"></header>
+<main>
+<div class="wrap narrow">
+  <p class="eyebrow">Guía · Categorías 4 y 5</p>
+  <h1>Subir vídeos y audios a TV URJC</h1>
+  <p class="lead">Los vídeos y podcasts no van en BURJC Digital: van <strong>todos en una única serie de TV URJC</strong>, que se crea desde el aula virtual. En el libro solo se incluye su lista. YouTube no vale.</p>
+  <div class="btn-row">
+    <a class="btn" href="https://urjc.atlassian.net/wiki/spaces/BDCP/pages/9899928/Procedimiento+de+subida+de+v+deos+Convocatoria+para+el+reconocimiento+de+publicaci+n+de+asignaturas+en+acceso+abierto" target="_blank" rel="noopener">Procedimiento oficial (con capturas)</a>
+    <a class="btn" href="https://tv.urjc.es/video/6a69c19a7a28bbe956023382" target="_blank" rel="noopener">Vídeo de ayuda al depósito</a>
+  </div>
+  <div class="toc"><a href="#antes">Antes de grabar</a><a href="#ya-grabados">¿Ya tienes los vídeos?</a><a href="#pasos">Subida en 8 pasos</a><a href="#despues">Después de subir</a><a href="#dudas">Dudas típicas</a></div>
+
+  <h2 id="antes">Antes de subir: prepara el vídeo</h2>
+  <div class="grid grid-2">
+    <div class="card"><h3>🎬 Cortinilla inicial (primeros segundos)</h3>
+      <ul><li>Título del vídeo, autores y fecha.</li><li>«Material docente en abierto de la Universidad Rey Juan Carlos».</li><li>Asignatura(s) y grado(s).</li><li>Lugar de depósito: TV URJC, con el enlace.</li><li>Logo de la licencia (CC BY o CC BY-SA).</li></ul></div>
+    <div class="card"><h3>🧾 Créditos finales</h3>
+      <ul><li>Nota de copyright completa: © año y autores, «Algunos derechos reservados», nombre de la licencia y enlace. <a href="textos.html#copyright">Texto listo</a>.</li><li>Si usaste IA generativa, la declaración va <strong>justo después de la cortinilla inicial</strong>, visible unos segundos.</li></ul></div>
+  </div>
+  <div class="callout tip"><strong>Para que puntúen:</strong> cada vídeo debe explicar un tema concreto, no ser una clase grabada entera. Con 10 vídeos específicos que cubran la mitad del temario llegas a 5 puntos; con 20 que cubran el 90 %, a 8; y para 14 tienen que cubrir la asignatura de forma prácticamente completa y destacar en detalle y utilidad. Los audios siguen la misma escala, y no cuentan si solo leen textos que ya están en otras categorías.</div>
+
+  <h2 id="ya-grabados">¿Ya tienes los vídeos grabados? Añade la portada a todos de una vez</h2>
+  <p>Si tus vídeos ya están hechos, no hace falta editarlos uno a uno. Con <a href="https://github.com/scaverod/Batch-Video-Intro-Adder" target="_blank" rel="noopener"><strong>Batch Video Intro Adder</strong></a>, una aplicación que he desarrollado para esto, pones una imagen de portada al principio de <strong>todos los vídeos de una carpeta</strong> con un solo comando. Mantiene el formato y la calidad originales y funciona con MP4, MKV, MOV, AVI, WMV, FLV y WebM.</p>
+  <div class="card">
+    <ol style="margin:0;padding-left:1.2em">
+      <li><strong>Diseña la portada</strong> como una diapositiva de 16:9 (1920×1080) y expórtala como PNG o JPG. Pon los datos de la cortinilla: título, autores, fecha, «Material docente en abierto de la Universidad Rey Juan Carlos», asignatura y grado, TV URJC y logo de la licencia. Si añades la nota de copyright completa, lo tienes todo en una sola imagen.</li>
+      <li><strong>Instala los requisitos:</strong> Python 3 y <a href="https://ffmpeg.org/download.html" target="_blank" rel="noopener">FFmpeg</a>. En Mac, <code>brew install ffmpeg</code>.</li>
+      <li><strong>Descarga la aplicación y sus dependencias:</strong>
+<pre id="bvia-install">git clone https://github.com/scaverod/Batch-Video-Intro-Adder.git
+cd Batch-Video-Intro-Adder
+pip install -r requirements.txt</pre></li>
+      <li><strong>Ejecútala</strong> indicando la carpeta de vídeos, la imagen y la carpeta de salida. <code>-d</code> es la duración de la portada en segundos (5 por defecto):
+<pre id="bvia-run">python main.py mis_videos portada.png videos_con_portada -d 5</pre></li>
+      <li>Revisa un par de vídeos de <code>videos_con_portada/</code> y súbelos a TV URJC siguiendo los pasos de abajo.</li>
+    </ol>
+    <div class="btn-row" style="margin-bottom:0">
+      <a class="btn btn-primary btn-sm" href="https://github.com/scaverod/Batch-Video-Intro-Adder" target="_blank" rel="noopener">Ver en GitHub</a>
+      <button class="btn btn-sm" data-copy="bvia-install">Copiar instalación</button>
+      <button class="btn btn-sm" data-copy="bvia-run">Copiar comando</button>
+    </div>
+  </div>
+  <div class="callout info">
+    <strong>Trucos:</strong>
+    <ul style="margin:.4em 0 0">
+      <li>Usa una imagen con la <strong>misma proporción que los vídeos</strong>. Si no, se estira para ajustarse.</li>
+      <li>¿Has usado IA? Pásala <strong>dos veces</strong>: primero con la imagen de la declaración de IA y después, sobre el resultado, con la portada. Así quedan la portada, la declaración y el vídeo, en el orden que pide la convocatoria.</li>
+      <li>Los vídeos que ya están en la carpeta de salida se saltan, así que puedes relanzarla si se corta.</li>
+      <li>La portada tiene que llevar un título. Si usas una común, pon el de la colección (por ejemplo, «Vídeos de la asignatura X»). Si prefieres el título de cada vídeo, crea una imagen por vídeo y ejecuta la aplicación con una carpeta por vídeo.</li>
+    </ul>
+  </div>
+
+  <h2 id="pasos">La subida, en 8 pasos</h2>
+  <p>Todo se hace desde el <strong>Aula Virtual</strong>, con el recurso TV URJC. Así los vídeos quedan en una serie ligada a la asignatura.</p>
+  <ol class="steps">
+    <li><h3>Entra en la asignatura</h3><p>Accede al Aula Virtual y pulsa en el nombre de la asignatura.</p></li>
+    <li><h3>Copia el nombre de la asignatura</h3><p>En la parte superior de la página aparece en rojo el nombre completo. Selecciónalo y cópialo.</p></li>
+    <li><h3>Activa la edición y añade un recurso</h3><p>Arriba a la derecha, pulsa <em>Activar edición</em>. Después pulsa <em>+ Añadir una actividad o un recurso</em> en la pestaña donde quieras el vídeo.</p></li>
+    <li><h3>Elige el recurso TV URJC</h3><p>Selecciónalo en la lista de actividades y recursos y espera a que se abra la ventana emergente.</p></li>
+    <li><h3>Crea la serie y ponle el nombre exacto</h3><p>Pulsa <em>+ NUEVO</em> y baja con la rueda del ratón hasta la información de la serie. En <em>Título de la serie</em>, pega el nombre de la asignatura <strong>tal cual aparece en el Aula Virtual</strong>, por ejemplo «2285 - REDES DE COMPUTADORES - MAÑANA A - 1Q». Encima del título aparece el <strong>ID de la serie</strong>: cópialo y guárdalo, porque lo necesitarás en la solicitud.</p></li>
+    <li><h3>Entra en la serie</h3><p>Pulsa <em>OK</em> y después el nombre de la serie que acabas de crear.</p></li>
+    <li><h3>Sube el vídeo con el asistente</h3><p>Ponle un título corto pero descriptivo, que corresponda al tema o a la parte del tema que trata. Evita títulos como «Tema 1», «Vídeo 3» o «Videoclase».</p></li>
+    <li><h3>Rellena los metadatos y elige la licencia</h3><p>En la descripción, pon la autoría («Autor: …», «Autora: …» o «Autores:» con uno por línea). Elige <strong>CC BY 4.0</strong> o <strong>CC BY-SA 4.0</strong>. Para subir más vídeos a la misma serie, vuelve al paso 6.</p></li>
+  </ol>
+
+  <h3>Texto para la descripción de cada vídeo</h3>
+  <p>Además de la autoría, la convocatoria (Anexo III.2) pide incluir «Materiales de la asignatura &lt;nombre temático&gt;» y el handle del libro de BURJC Digital:</p>
+  <pre id="tvdesc">Autores:
+- Nombre Apellido Apellido
+- Nombre Apellido Apellido
+
+Materiales de la asignatura &lt;nombre temático&gt;.
+Libro de la asignatura en BURJC Digital: https://hdl.handle.net/10115/…
+©2026 Nombre Apellido Apellido y Nombre Apellido Apellido. Algunos derechos reservados. Este vídeo se distribuye bajo la licencia «Atribución-CompartirIgual 4.0 Internacional» de Creative Commons: https://creativecommons.org/licenses/by-sa/4.0/deed.es</pre>
+  <div class="btn-row"><button class="btn btn-sm" data-copy="tvdesc">Copiar plantilla</button><a class="btn btn-sm" href="textos.html#tv">Generarla con mis datos →</a></div>
+
+  <h2 id="despues">Después de subir</h2>
+  <ul>
+    <li><strong>Apunta el ID y la URL de la serie</strong> (<code>https://tv.urjc.es/series/…</code>). Los necesitas para el formulario de solicitud.</li>
+    <li><strong>Añade el capítulo de vídeos y audios al libro</strong>, con la lista de títulos, el tema de cada uno y el enlace a la serie. La plantilla del libro ya lo trae (<code>capitulos/4-5-videos-audios.tex</code>).</li>
+    <li><strong>Cuando tengas el handle</strong> de BURJC, añádelo a la descripción de cada vídeo.</li>
+    <li>Revisa que <strong>todos</strong> los vídeos y audios están en esa misma serie y ninguno en otra.</li>
+  </ul>
+
+  <h2 id="dudas">Dudas típicas</h2>
+  <details><summary>He subido los vídeos y no los veo públicos.</summary><div><p>Es lo normal. Hasta que la asignatura se ponga en abierto, solo los ven tus estudiantes desde el aula virtual. Si se aprueba, la serie se abre al público.</p></div></details>
+  <details><summary>Imparto varios grupos o asignaturas. ¿En qué aula creo la serie?</summary><div><p>En una de las asignaturas en las que se imparten esos contenidos. Crea una sola serie y, si quieres, enlázala desde las demás aulas.</p></div></details>
+  <details><summary>Tengo los vídeos en YouTube.</summary><div><p>No cuentan. Descárgalos, añade la cortinilla y la licencia, y súbelos a TV URJC.</p></div></details>
+  <details><summary>¿Puedo usar voz o avatar generados con IA?</summary><div><p>Sí, pero hay que declararlo después de la cortinilla. Un vídeo generado automáticamente a partir de tus apuntes puntúa la mitad y no cuenta para llegar a los 28 puntos.</p></div></details>
+</div>
+</main>
+<footer id="site-footer"></footer>
+<script src="assets/app.js"></script>
+</body>
+</html>

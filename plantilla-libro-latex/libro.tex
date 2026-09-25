@@ -1,0 +1,190 @@
+% =====================================================================
+%  Plantilla genérica: "el libro" de la Convocatoria de Materiales
+%  Docentes en Acceso Abierto URJC 2026-2027 (Anexo III)
+%
+%  Un único PDF con las categorías 0-3 completas y la descripción de
+%  las categorías 4-8. Pensada para Overleaf (sube el ZIP tal cual).
+%
+%  1. Edita datos.tex
+%  2. Copia tus PDFs en materiales/<categoría>/
+%  3. Edita cada capitulos/*.tex (y comenta los que no presentes abajo)
+%  4. Compila con pdfLaTeX y renombra el PDF a <Nombre_tematico>.pdf
+%
+%  Basada en el libro de Estructuras de Datos (S. Cavero, S. Sánchez).
+%  Licencia de la plantilla: CC BY-SA 4.0
+% =====================================================================
+\documentclass[11pt,a4paper,oneside,openany]{book}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-noshorthands]{babel}
+\usepackage{lmodern}
+
+\usepackage[top=3cm,bottom=3cm,left=2.8cm,right=2.8cm]{geometry}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{etoolbox}
+\usepackage{tikz}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+\usepackage{pdfpages}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+
+\input{datos}
+
+\definecolor{urjcRed}{HTML}{CB0017}
+\definecolor{urjcGris}{HTML}{3C3C3B}
+
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+  pdftitle={Materiales de la asignatura \nombreTematico},
+  pdfauthor={\autores},
+  pdfsubject={Material docente en abierto de la Universidad Rey Juan Carlos},
+}
+\usepackage{url}
+
+% ---------------------------------------------------------------------
+% Licencia (texto y logo según datos.tex)
+% ---------------------------------------------------------------------
+\newcommand{\licenciaNombre}{%
+  \ifdefstring{\licenciaCodigo}{by}%
+    {Atribución 4.0 Internacional}%
+    {Atribución-CompartirIgual 4.0 Internacional}}
+\newcommand{\licenciaURL}{https://creativecommons.org/licenses/\licenciaCodigo/4.0/deed.es}
+% Los logos vienen con el paquete doclicense (incluido en Overleaf/TeX Live)
+\newcommand{\licenciaLogo}[1][1.1cm]{%
+  \includegraphics[height=#1]{doclicense-CC-\licenciaCodigo-88x31}}
+
+% ---------------------------------------------------------------------
+% Macros para incluir materiales
+% ---------------------------------------------------------------------
+% \material{Título de la sección}{ruta/al/fichero.pdf}{Descripción breve}
+% Si el PDF todavía no existe, se muestra un aviso en lugar de fallar.
+\newcommand{\material}[3]{%
+  \cleardoublepage
+  \section{#1}
+  \noindent #3\par
+  \IfFileExists{#2}{%
+    \includepdf[pages=-,pagecommand={\thispagestyle{plain}}]{#2}%
+  }{%
+    \begin{tcolorbox}[colback=urjcRed!5,colframe=urjcRed,title=Falta el fichero]
+      No se encontró \texttt{\detokenize{#2}}. Cópialo en esa ruta
+      (sin espacios ni tildes en el nombre: usa \texttt{tools/quitar\_tildes.py}).
+    \end{tcolorbox}%
+  }%
+}
+
+% \introcategoria{texto}: recuadro al principio de cada capítulo
+\newtcolorbox{introcategoria}{colback=urjcGris!4,colframe=urjcGris!60,
+  boxrule=0.5pt,arc=3pt,left=8pt,right=8pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\small\thepage}
+\fancyhead[L]{\small\itshape Materiales de la asignatura \nombreTematico}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\begin{document}
+\frontmatter
+
+% =====================================================================
+% PORTADA  (Anexo III.3: título, autores, fecha, texto "Material docente
+% en abierto de la URJC", asignatura(s) y grado(s), lugar de depósito
+% y licencia). Revisa el modelo oficial de portada si OfiLibre lo publica.
+% =====================================================================
+\begin{titlepage}
+  \begin{tikzpicture}[remember picture,overlay]
+    \shade[top color=urjcRed!20,bottom color=white]
+      (current page.north west) rectangle ([yshift=-1.6cm]current page.north east);
+    \shade[bottom color=urjcRed!20,top color=white]
+      (current page.south west) rectangle ([yshift=1.6cm]current page.south east);
+  \end{tikzpicture}
+  \centering
+  \includegraphics[width=0.36\textwidth]{img/URJC_logo.png}\par
+  \vspace{1.6cm}
+  {\sffamily\large Materiales de la asignatura\par}
+  \vspace{0.3cm}
+  {\sffamily\bfseries\fontsize{30}{36}\selectfont\color{urjcRed}\nombreTematico\par}
+  \vspace{0.6cm}
+  {\sffamily\large \subtitulo\par}
+  \vspace{1.4cm}
+  {\sffamily\Large \autoresPortada\par}
+  \vspace{1.2cm}
+  {\sffamily\small \titulaciones\par}
+  \vspace{0.6cm}
+  {\sffamily Curso \curso\par}
+  \vfill
+  {\sffamily\bfseries Material docente en abierto de la Universidad Rey Juan Carlos\par}
+  \vspace{0.2cm}
+  {\sffamily\small Depositado en BURJC Digital: \url{\handle}\par}
+  \vspace{0.8cm}
+  \begin{minipage}[c]{0.3\textwidth}\centering
+    \includegraphics[width=0.75\textwidth]{img/p-trans.png}
+  \end{minipage}\hfill
+  \begin{minipage}[c]{0.3\textwidth}\centering
+    \licenciaLogo[1.2cm]
+  \end{minipage}
+\end{titlepage}
+
+% =====================================================================
+% PÁGINA DE CRÉDITOS: nota de copyright + licencia detallada
+% + declaración de uso de IA (Anexo VI: 1.ª o 2.ª página tras la portada)
+% =====================================================================
+\thispagestyle{empty}
+\noindent
+{\bfseries Materiales de la asignatura \nombreTematico}\\[2pt]
+\subtitulo\\[10pt]
+\autores\\[18pt]
+Material docente en abierto de la Universidad Rey Juan Carlos\\[4pt]
+Depositado en BURJC Digital: \url{\handle}
+\ifdefempty{\serieTV}{}{\\Vídeos y audios en TV URJC: \url{\serieTV}}
+
+\vspace{1.2cm}
+\noindent
+\licenciaLogo[0.9cm]\\[8pt]
+\textcopyright\,\anio{} \autores\\
+Algunos derechos reservados.\\
+Este documento se distribuye bajo la licencia\\
+``\licenciaNombre'' de Creative Commons,\\
+disponible en \url{\licenciaURL}
+
+\vspace{0.4cm}
+\noindent{\small Esta licencia no se aplica a los materiales de terceros que
+puedan estar incluidos en esta obra, que mantienen los derechos de sus autores
+originales y se citan en el lugar correspondiente.}
+
+\vfill
+% ---- Declaración de uso de IA generativa (Anexo VI) -----------------
+% Obligatoria SOLO si has incluido contenido producido por IA generativa.
+% Si no es tu caso, borra este bloque (o déjalo indicando que no se usó).
+\noindent{\bfseries Declaración sobre el uso de herramientas de inteligencia artificial generativa}\par
+\smallskip
+\noindent{\small
+Este libro incluye contenidos creados con herramientas de inteligencia artificial generativa:
+\begin{itemize}[nosep,leftmargin=1.2em]
+  \item \emph{Tipo de herramienta} (p.\,ej. generador de texto / de imágenes / de código):
+        \emph{forma de uso} (borradores, corrección, traducción\ldots)
+        en \emph{grado / partes concretas} (capítulos, figuras\ldots).
+\end{itemize}
+Todo el contenido ha sido cuidadosamente revisado, editado y validado por los
+autores, que asumen la plena responsabilidad sobre la versión final de la obra.}
+
+\cleardoublepage
+\tableofcontents
+
+% =====================================================================
+\mainmatter
+\input{capitulos/00-como-usar}
+\input{capitulos/0-guia-estudio}     % Categoría 0 (OBLIGATORIA)
+\input{capitulos/1-apuntes}          % Categoría 1
+\input{capitulos/2-presentaciones}   % Categoría 2
+\input{capitulos/3-ejercicios}       % Categoría 3
+\input{capitulos/4-5-videos-audios}  % Categorías 4 y 5 (solo listado)
+\input{capitulos/6-software}         % Categoría 6 (resumen + código en ZIP adjunto)
+\input{capitulos/7-aula-virtual}     % Categoría 7 (resumen + .mbz/.h5p adjuntos)
+\input{capitulos/8-otros}            % Categoría 8
+
+\end{document}

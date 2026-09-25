@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mentores</title>
+<meta name="description" content="Busca una persona mentora de tu centro o área de conocimiento para la convocatoria de materiales en abierto URJC 2026-2027.">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .filters { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 10px; margin: 18px 0 8px; }
+  @media (max-width: 760px) { .filters { grid-template-columns: 1fr; } }
+  .mentor { display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 14px; align-items: start; }
+  .avatar { width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; color: #fff; font-size: 1rem; }
+  .mentor h3 { margin: 0; font-size: 1.02rem; }
+  .mentor .meta { font-size: .86rem; color: var(--muted); margin: 4px 0 10px; line-height: 1.45; }
+  .mentor .meta b { color: var(--text); font-weight: 600; }
+  .mentor .btn-row { margin: 0; gap: 6px; }
+  .count { color: var(--muted); font-size: .9rem; }
+</style>
+</head>
+<body>
+<header id="site-header"></header>
+<main>
+<div class="wrap">
+  <p class="eyebrow">Programa de mentoría</p>
+  <h1>Encuentra a tu mentor/a</h1>
+  <p class="lead">Son docentes que ya han pasado por la convocatoria con buenos resultados. Busca por nombre, centro o área de conocimiento y escríbele directamente. El botón de contacto pone en copia a OfiLibre, como pide el programa.</p>
+
+  <div class="filters">
+    <input type="search" id="q" placeholder="Busca por nombre, área, departamento…" aria-label="Buscar mentores">
+    <select id="centro" aria-label="Filtrar por centro"><option value="">Todos los centros</option></select>
+    <select id="area" aria-label="Filtrar por área"><option value="">Todas las áreas</option></select>
+  </div>
+  <p class="count" id="count"></p>
+  <div class="grid grid-2" id="list"></div>
+
+  <div class="callout info" style="margin-top:24px">
+    <strong>¿No hay nadie de tu área?</strong> No pasa nada: el proceso es el mismo en todas las disciplinas. Elige a alguien de tu centro o <a href="mailto:ofilibre@urjc.es?subject=Solicitud%20de%20mentor%C3%ADa%20%E2%80%94%20convocatoria%20materiales%20en%20abierto%202026-27">pide a OfiLibre que te asignen uno</a>.
+    Listado tomado de la <a href="https://ofilibre.urjc.es/guias/convocatoria-asignaturas-abierto/#programa-de-mentoría">guía oficial de OfiLibre</a> (septiembre de 2026).
+  </div>
+</div>
+</main>
+<footer id="site-footer"></footer>
+<script src="assets/app.js"></script>
+<script>
+// [nombre, usuario, centro, departamento, área]
+const M = [
+  ["Alejandro García Romero", "alejandro.garcia", "Fac. de CC. de la Salud", "Psicología", "Metodología de las Ciencias del Comportamiento"],
+  ["Alejandro Carbonell Alcocer", "alejandro.carbonell", "Fac. de CC. de la Comunicación", "Comunicación Audiovisual y Publicidad", "Comunicación Audiovisual y Publicidad"],
+  ["Ana González Pelayo", "ana.gonzalezp", "Fac. Ciencias Jurídicas y Política", "Derecho Público I y Ciencia Política", "Derecho Financiero y Tributario"],
+  ["Ariadna María De La Vega Castelo", "ariadna.delavega", "Fac. de CC. de la Salud", "Psicología", "Personalidad, Evaluación y Tratamiento Psicológico"],
+  ["Cristian Gómez Macías", "cristian.gomez", "Esc. Tec. Sup. de Ingeniería Informática", "Informática y Estadística", "Lenguajes y Sistemas Informáticos"],
+  ["Cristian David Chushig Muzo", "david.chushig", "E. Ingeniería de Fuenlabrada", "Teoría de la Señal y Comunicaciones y Sistemas Telemáticos y Computación", "Teoría de la Señal y Comunicaciones"],
+  ["Daniel Palacios Alonso", "daniel.palacios", "Esc. Tec. Sup. de Ingeniería Informática", "Informática y Estadística", "Ciencia de la Computación e Inteligencia Artificial"],
+  ["Daniela Patricia Feversani Burzmiñski", "daniela.feversani", "E. Ingeniería de Fuenlabrada", "Teoría de la Señal y Comunicaciones y Sistemas Telemáticos y Computación", "Teoría de la Señal y Comunicaciones"],
+  ["David Trillo Del Pozo", "david.trillo", "Fac. CC. Economía y Empresa", "Economía de la Empresa (ADO), Economía Aplicada II y Fundamentos Análisis Económico", "Economía Aplicada"],
+  ["Javier Alejandro Quintero Roba", "javier.quintero", "E. Ingeniería de Fuenlabrada", "Teoría de la Señal y Comunicaciones y Sistemas Telemáticos y Computación", "Teoría de la Señal y Comunicaciones"],
+  ["Jennifer García Carrizo", "jennifer.garcia", "Fac. de CC. de la Comunicación", "Comunicación Audiovisual y Publicidad", "Comunicación Audiovisual y Publicidad"],
+  ["Juan Alonso López Iniesta", "juanalonso.lopez", "Fac. de Artes y Humanidades", "Artes y Humanidades", "Dibujo"],
+  ["Nuria Alonso Gallo", "nuria.alonso", "Fac. CC. Economía y Empresa", "Economía de la Empresa (ADO), Economía Aplicada II y Fundamentos Análisis Económico", "Economía Aplicada"],
+  ["Rosa Fraile Fernández", "rosa.fraile", "Fac. Ciencias Jurídicas y Política", "Derecho Público I y Ciencia Política", "Derecho Financiero y Tributario"],
+  ["Samuel Calle Mendoza", "samuel.calle", "Fac. de CC. de la Comunicación", "Periodismo y Comunicación Corporativa", "Periodismo"],
+  ["Sergio Cavero Díaz", "sergio.cavero", "Esc. Tec. Sup. de Ingeniería Informática", "Informática y Estadística", "Ciencia de la Computación e Inteligencia Artificial"],
+  ["Víctor Aceña Gil", "victor.acena", "Esc. Tec. Sup. de Ingeniería Informática", "Informática y Estadística", "Estadística e Investigación Operativa"],
+];
+const COLORS = ["#cb0017", "#1f5f99", "#1f7a4d", "#9a5b00", "#6b3fa0", "#0f766e", "#b4235a", "#4b5563"];
+const norm = t => t.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+const uniq = i => [...new Set(M.map(m => m[i]))].sort((a, b) => a.localeCompare(b, "es"));
+const fill = (id, vals) => document.getElementById(id).insertAdjacentHTML("beforeend", vals.map(v => `<option>${v}</option>`).join(""));
+fill("centro", uniq(2)); fill("area", uniq(4));
+
+function mail(m) {
+  const first = m[0].split(" ")[0];
+  const subject = "Mentoría — Convocatoria de materiales docentes en abierto 2026-27";
+  const body = `Hola, ${first}:
+
+Soy [tu nombre], docente de [asignatura] en [grado/centro]. Me gustaría presentarme a la Convocatoria de materiales docentes en acceso abierto 2026-2027 y te escribo para pedirte que seas mi mentor/a.
+
+Lo que tengo ahora mismo: [apuntes / presentaciones / ejercicios / vídeos / software…]
+
+¿Podríamos tener una primera reunión?
+
+Muchas gracias,
+[tu nombre]`;
+  return `mailto:${m[1]}@urjc.es?cc=ofilibre@urjc.es&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+function initials(n) { const p = n.split(" "); return (p[0][0] + (p[p.length > 2 ? p.length - 2 : 1] || " ")[0]).toUpperCase(); }
+
+function render() {
+  const q = norm(document.getElementById("q").value).split(/\s+/).filter(Boolean);
+  const c = document.getElementById("centro").value, a = document.getElementById("area").value;
+  const res = M.filter(m => (!c || m[2] === c) && (!a || m[4] === a) && q.every(t => norm(m.join(" ")).includes(t)));
+  document.getElementById("count").textContent = `${res.length} ${res.length === 1 ? "persona mentora" : "personas mentoras"}`;
+  document.getElementById("list").innerHTML = res.map(m => `
+    <div class="card mentor">
+      <div class="avatar" style="background:${COLORS[uniq(4).indexOf(m[4]) % COLORS.length]}" aria-hidden="true">${initials(m[0])}</div>
+      <div>
+        <h3>${m[0]}</h3>
+        <div class="meta"><b>${m[4]}</b><br>${m[3]}<br>${m[2]}</div>
+        <div class="btn-row">
+          <a class="btn btn-primary btn-sm" href="${mail(m)}">✉ Contactar</a>
+          <a class="btn btn-sm" href="https://servicios.urjc.es/pdi/ver/${m[1]}" target="_blank" rel="noopener">Ficha PDI</a>
+        </div>
+      </div>
+    </div>`).join("");
+}
+["q", "centro", "area"].forEach(id => document.getElementById(id).addEventListener("input", render));
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Depositar el código</title>
+<meta name="description" content="Guía paso a paso para depositar programas de ordenador (categoría 6) en Software Heritage y BURJC Digital.">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header id="site-header"></header>
+<main>
+<div class="wrap narrow">
+  <p class="eyebrow">Guía · Categoría 6</p>
+  <h1>Depositar el código</h1>
+  <p class="lead">El software sigue este camino: <strong>repositorio público → Software Heritage → ZIP adjunto en el depósito único de BURJC</strong>, más un capítulo que lo describe en el libro. Tiene que ser código de verdad.</p>
+  <div class="btn-row">
+    <a class="btn" href="https://ofilibre.urjc.es/guias/convocatoria-asignaturas-abierto-software/" target="_blank" rel="noopener">Guía oficial de OfiLibre</a>
+    <a class="btn" href="https://archive.softwareheritage.org/save/" target="_blank" rel="noopener">Software Heritage · Save code now</a>
+  </div>
+
+  <div class="callout warn"><strong>Lo que no cuenta como software</strong> (motivos reales de exclusión en convocatorias anteriores):
+    <ul style="margin:.4em 0 0"><li>Un PDF o una guía (por ejemplo, de Git) con enlaces a repositorios, pero sin el código dentro del depósito.</li><li>Documentos que en realidad son apuntes o enunciados. Esos van en las categorías 1 o 3.</li></ul></div>
+
+  <h2>Requisitos</h2>
+  <ul>
+    <li>Está en un repositorio <strong>público</strong> (GitHub, GitLab…) y archivado en Software Heritage.</li>
+    <li>Se usa en la asignatura este curso y al menos un docente de la asignatura es autor.</li>
+    <li>Incluye instrucciones de uso (README) y <strong>todo el código fuente</strong>.</li>
+    <li>Tiene una licencia aprobada por la OSI (GPL-3.0, MIT, Apache-2.0…) en un fichero <code>LICENSE</code>.</li>
+    <li>Rúbrica: para 8 puntos, útil de forma fundamental en al menos el 90 % del temario y con una cantidad notable de código.</li>
+  </ul>
+
+  <h2>Paso a paso</h2>
+  <ol class="steps">
+    <li><h3>Prepara el repositorio</h3><p>Añade un <code>README.md</code> que explique para qué sirve en la asignatura y cómo usarlo, y un <code>LICENSE</code>. Recomendado: una cabecera con copyright e identificador SPDX en cada fichero fuente, y el contenido ordenado por temas o prácticas.</p></li>
+    <li><h3>Publícalo</h3><p>Súbelo a GitHub o GitLab como repositorio público. Truco: si lo marcas como <em>Template</em> en GitHub, cualquier docente o estudiante puede crear su copia con un clic.</p></li>
+    <li><h3>Archívalo en Software Heritage</h3><p>Primero actualiza el repositorio con la versión que vas a presentar. Después, en <a href="https://archive.softwareheritage.org/save/">Save code now</a>, pega la URL y pide el archivado. La <a href="https://www.softwareheritage.org/browser-extensions/">extensión del navegador</a> lo hace más cómodo.</p></li>
+    <li><h3>Obtén el SWHID y el tar.gz</h3><p>Busca el repositorio en el <a href="https://archive.softwareheritage.org/browse/search">archivo</a>, abre <em>History</em>, elige la versión y pulsa <em>Download</em>. El nombre del fichero descargado es el SWHID: quita <code>.tar.gz</code> y cambia <code>_</code> por <code>:</code>, por ejemplo <code>swh:1:dir:46dfa1d1…</code>.</p></li>
+    <li><h3>Si tienes varios repositorios, agrúpalos</h3><p>Mete todos los tar.gz en un único <code>codigo-fuente.zip</code> junto con un README general que tenga una tabla con el repositorio, su SWHID y su tema. Ejemplo abajo.</p></li>
+    <li><h3>Escribe el capítulo del libro</h3><p>Explica qué programas hay, en qué temas se usan, la URL del repositorio y el SWHID. Puedes incluir el README en PDF: <code>pandoc README.md -o README.pdf</code>. La plantilla trae <code>capitulos/6-software.tex</code>.</p></li>
+    <li><h3>Adjúntalo en el depósito único de BURJC</h3><p>Sube el ZIP como adjunto <strong>en el mismo depósito que el libro</strong>, no en uno aparte. En la descripción del depósito indica:</p></li>
+  </ol>
+  <pre id="swdesc">codigo-fuente.zip: programas de ordenador utilizados en la asignatura &lt;nombre temático&gt;. Archivo con código fuente, depositado en Software Heritage con el SWHID swh:1:dir:&lt;id&gt;. Incluye &lt;plantillas y soluciones de las prácticas de laboratorio / programas de ejemplo…&gt;. Repositorio público: &lt;url&gt;.</pre>
+  <div class="btn-row"><button class="btn btn-sm" data-copy="swdesc">Copiar</button><a class="btn btn-sm" href="textos.html#desc">Generarlo con mis datos →</a></div>
+
+  <h2>Ejemplo de README general</h2>
+  <p>Es el formato que usamos en <em>Estructuras de Datos</em>: una fila por práctica, con su repositorio plantilla y su SWHID.</p>
+  <pre id="readme"># Programas de la asignatura &lt;Nombre&gt;
+
+**Licencia**
+©2026 Nombre Apellido y Nombre Apellido. Algunos derechos reservados.
+Código bajo licencia GPL-3.0-or-later (ver LICENSE en cada repositorio).
+Documentación bajo licencia CC BY-SA 4.0.
+
+Material docente en abierto de la Universidad Rey Juan Carlos.
+
+## Repositorios
+
+| Tema | Repositorio | Software Heritage |
+| :--- | :--- | :--- |
+| 1. Punteros | [Lab01-Punteros](https://github.com/org/Lab01-Punteros) | `swh:1:dir:90acac61…` |
+| 2. TADs     | [Lab02-TAD](https://github.com/org/Lab02-TAD)           | `swh:1:dir:9f396aeb…` |
+
+## Cómo usarlos
+1. Pulsa «Use this template» en GitHub (o descarga el ZIP).
+2. …</pre>
+  <div class="btn-row"><button class="btn btn-sm" data-copy="readme">Copiar README</button></div>
+
+  <h2>Checklist rápido</h2>
+  <ul>
+    <li>☐ README con el propósito docente y las instrucciones</li>
+    <li>☐ LICENSE aprobada por la OSI</li>
+    <li>☐ Versión archivada en Software Heritage y SWHID apuntado</li>
+    <li>☐ ZIP con el código fuente, y el código objeto si es relevante</li>
+    <li>☐ Capítulo en el libro con los programas, sus temas y los SWHID</li>
+    <li>☐ ZIP adjunto al <strong>mismo</strong> depósito, con la descripción que menciona el SWHID</li>
+  </ul>
+</div>
+</main>
+<footer id="site-footer"></footer>
+<script src="assets/app.js"></script>
+</body>
+</html>

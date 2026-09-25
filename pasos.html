@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checklist de la convocatoria</title>
+<meta name="description" content="Checklist interactivo, por fases, para preparar y presentar materiales a la convocatoria de acceso abierto URJC 2026-2027.">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header id="site-header"></header>
+<main>
+<div class="wrap narrow">
+  <p class="eyebrow">Checklist</p>
+  <h1>Paso a paso, sin dejarte nada</h1>
+  <p class="lead">Marca cada punto cuando lo tengas. Si quieres llevarlo a una reunión de mentoría, imprímelo o guárdalo como PDF.</p>
+  <p class="saved-note no-print">💾 Tu progreso <strong>se guarda solo</strong> en este navegador: si cierras y vuelves, seguirá donde lo dejaste. Para seguir en otro ordenador, usa «Copiar enlace con mi progreso».</p>
+
+  <div class="progress">
+    <div class="progress-meta">
+      <span><strong id="p-done">0</strong> de <span id="p-total">0</span> completados</span>
+      <span class="no-print">
+        <label style="font-size:.88rem;cursor:pointer"><input type="checkbox" id="hide-done"> Ocultar hechos</label>
+      </span>
+    </div>
+    <div class="progress-bar" aria-hidden="true"><div id="p-bar"></div></div>
+  </div>
+
+  <div class="toc no-print" id="phase-toc"></div>
+  <div id="phases"></div>
+
+  <div class="btn-row no-print">
+    <button class="btn" onclick="window.print()">🖨 Imprimir / PDF</button>
+    <button class="btn" id="share">🔗 Copiar enlace con mi progreso</button>
+    <button class="btn" id="export">⬇ Exportar progreso</button>
+    <label class="btn" style="cursor:pointer">⬆ Importar<input type="file" id="import" accept="application/json" hidden></label>
+    <button class="btn" id="reset">Reiniciar</button>
+  </div>
+</div>
+</main>
+<footer id="site-footer"></footer>
+<script src="assets/app.js"></script>
+<script>
+const PHASES = [
+  { id: "f1", title: "1 · Arranque y equipo", when: "septiembre – octubre", items: [
+    ["leer", "Leer la convocatoria (o al menos esta web) y ver el vídeo de presentación", 'Convocatoria oficial en la <a href="https://sede.urjc.es/tablon-oficial/anuncio/16116/">sede</a>. <a href="https://tv.urjc.es/video/6aaa926e7babc7706309cde2">Vídeo de la sesión del 16/09/2026</a> y <a href="https://tv.urjc.es/video/6a69c19a7a28bbe956023382">vídeo de ayuda al depósito</a>.'],
+    ["mentor", "Pedir mentor/a (con copia a ofilibre@urjc.es)", "Escribe directamente a tu mentor/a o pide a OfiLibre que te asignen uno."],
+    ["agrupar", "Identificar las asignaturas del aula virtual que comparten materiales", "Los grupos de la misma asignatura o las asignaturas iguales en varios grados se presentan como <strong>una única solicitud agrupada</strong>."],
+    ["actas", "Confirmar quién es responsable de actas", "Solo esa persona puede enviar la solicitud (en asignaturas ordinarias). En las extraordinarias, como el TFG, la envía una persona autora."],
+    ["pod", "Listar a los docentes del POD 2026-27 y a los autores de los materiales", "Para cobrar hay que impartir la asignatura este curso <em>y</em> ser autor de algún material con puntos."],
+    ["pct", "Acordar el porcentaje de autoría de cada autor", "La suma puede ser menor que el 100 % si hay autores sin derecho a incentivo."],
+    ["lic", "Elegir la licencia: CC BY 4.0 o CC BY-SA 4.0", "Tiene que estar de acuerdo todo el equipo. Para el software, cualquier licencia aprobada por la OSI."],
+    ["previas", "Comprobar si la asignatura ya se presentó en los dos últimos cursos", "Si fue reconocida, cada categoría debe ser al menos un <strong>80 % distinta</strong>. Si al menos el 50 % se basa en material ya incentivado, no hay dinero (aunque sí reconocimiento)."],
+    ["nombre", "Fijar el nombre temático", "Se usa en el formulario, en el título del depósito («Materiales de la asignatura …») y en el nombre del PDF."],
+  ]},
+  { id: "f2", title: "2 · Estrategia de categorías", when: "octubre", items: [
+    ["plan28", "Hacer el plan para llegar a 28 puntos", 'Se suman tus 5 mejores categorías. Usa la <a href="categorias.html#calculadora">calculadora</a>.'],
+    ["cat0", "Tener clara la guía de estudio (cat. 0), que es obligatoria aunque no puntúa", "Para cada tema, un calendario con el plan de cada sesión: materiales, contenidos, objetivos, actividades y trabajo personal. No es la guía docente."],
+    ["cobertura", "Comprobar que cada categoría cubre al menos el 90 % del temario", "Es el requisito para pasar de 5 a 8 puntos. Para 14, la asignatura debe estar prácticamente completa y destacar en detalle."],
+    ["soluciones", "Ejercicios y exámenes con soluciones", "Sin soluciones, la cat. 3 se queda en 5 puntos como máximo."],
+    ["videos-plan", "Si hay vídeos: que sean específicos, no grabaciones de clase", "Hacen falta 10 vídeos para 5 puntos, 20 para 8 y la asignatura completa para 14."],
+  ]},
+  { id: "f3", title: "3 · Preparar los materiales", when: "octubre – diciembre", items: [
+    ["actualizar", "Actualizar los materiales al curso 2026-27", "Fechas, calendario y bibliografía."],
+    ["terceros", "Revisar las imágenes, figuras y textos de terceros", "Deben ser tuyos, tener licencia libre, contar con permiso o estar amparados por el derecho de cita. Cítalos siempre y elimina lo dudoso."],
+    ["datos-personales", "Quitar datos personales de estudiantes", "Nada de nombres, notas, caras ni foros con alumnos."],
+    ["marcar", "Marcar cada material con la licencia", "En los documentos, portada y nota de copyright; en las presentaciones, una diapositiva final; en los vídeos, una cortinilla (<a href=\"tv-urjc.html#ya-grabados\">añádela a todos de una vez</a>); en los audios, una locución."],
+    ["ia", "Anotar si has usado IA generativa y cómo", "Si hay contenido generado con IA, necesitas la declaración del Anexo VI y guardar los prompts y el proceso para el ZIP de editables."],
+    ["tv-serie", "Vídeos y audios: subirlos a una única serie de TV URJC", 'Sigue el <a href="https://urjc.atlassian.net/wiki/spaces/BDCP/pages/9899928/Procedimiento+de+subida+de+v+deos+Convocatoria+para+el+reconocimiento+de+publicaci+n+de+asignaturas+en+acceso+abierto">procedimiento de TV URJC</a>. YouTube no vale.'],
+    ["tv-meta", "Vídeos: título por tema, autoría, licencia y descripción", "La descripción debe incluir «Materiales de la asignatura &lt;nombre temático&gt;» y el handle del libro (añádelo cuando lo tengas)."],
+    ["sw-repo", "Software: repositorio público con README y LICENSE (OSI)", "Tiene que ser <strong>código</strong> de verdad. Una guía con enlaces no cuenta (motivo de exclusión en años anteriores)."],
+    ["sw-swh", "Software: depositarlo en Software Heritage y obtener el SWHID y el tar.gz", 'Usa <a href="https://archive.softwareheritage.org/save/">Save code now</a> o la extensión del navegador.'],
+    ["moodle", "Aula virtual: exportar los elementos importables", "Copias de seguridad .mbz, ficheros .h5p o XML de preguntas y glosarios, cada uno en un archivo separado."],
+  ]},
+  { id: "f4", title: "4 · Montar el libro", when: "diciembre", items: [
+    ["plantilla", "Descargar la plantilla del libro y abrirla en Overleaf", '<a href="libro.html">Guía del libro</a>. También vale LibreOffice o Word si concatenas bien los PDF.'],
+    ["portada", "Portada con todos los datos obligatorios", "Título, autores, fecha, «Material docente en abierto de la Universidad Rey Juan Carlos», asignatura(s) y grado(s), lugar de depósito y logo de la licencia."],
+    ["copyright", "Página 2 con la nota de copyright y la licencia detallada", "© año, autores, «Algunos derechos reservados», nombre de la licencia y enlace."],
+    ["ia-libro", "Declaración de IA en la 1.ª o 2.ª página tras la portada (si procede)", "Debe recoger el tipo de herramienta, la forma de uso y el grado, y dejar claro que todo lo revisaron y validaron los autores."],
+    ["indice", "Índice por categorías o por temas", "Tiene que quedar claro qué temas cubre cada categoría. Los temas son los de la guía de estudio."],
+    ["cap0-3", "Capítulos de las categorías 0 a 3 completos dentro del PDF", ""],
+    ["cap4-5", "Capítulo con la lista de vídeos y audios y la referencia a la serie", ""],
+    ["cap6-8", "Capítulos que describen el software, el aula virtual y otros materiales", "Incluye un resumen, en qué temas se usan y, si es posible, una versión PDF."],
+    ["nombre-pdf", "PDF llamado <code>Nombre_tematico.pdf</code>", "Es el nombre temático con los espacios sustituidos por guiones bajos."],
+    ["zip-edit", "ZIP con los fuentes editables", "El proyecto LaTeX, los .pptx/.odp y .docx/.odt y, si has usado IA, los prompts y el proceso."],
+    ["revisar", "Revisión cruzada con tu mentor/a", "Pasa la lista de comprobaciones de OfiLibre sobre la portada, la página interior y los metadatos."],
+  ]},
+  { id: "f5", title: "5 · Depósito en BURJC Digital", when: "antes del 15 de enero (mejor, antes de vacaciones)", items: [
+    ["autoriz", "Firmar y enviar la autorización de publicación en abierto", 'La firma quien sube el material. Consulta <a href="https://burjcdigital.urjc.es/page/howtopublish">cómo publicar en BURJC</a>.'],
+    ["b-titulo", "Título: «Materiales de la asignatura &lt;nombre temático&gt;»", ""],
+    ["b-autores", "Autores y licencia idénticos a los de la portada", "Es uno de los motivos típicos de rechazo o subsanación."],
+    ["b-resumen", "Resumen: descripción temática de la asignatura", ""],
+    ["b-desc", "Descripción: una entrada por archivo, indicando su categoría con nombre textual", "Ejemplo: «Estructuras_de_Datos.pdf: libro principal con guía de estudio, apuntes, presentaciones y ejercicios»."],
+    ["b-adjuntos", "Adjuntos: fuentes editables, código fuente, ficheros de Moodle y PDF sueltos opcionales", "En el código, indica en la descripción: «Archivo con código fuente, depositado en Software Heritage con el SWHID …»."],
+    ["handle", "Enviar el depósito y apuntar el handle (https://hdl.handle.net/10115/…)", "Se genera al enviar el depósito. Después la biblioteca lo revisa: vigila el correo por si pide cambios, porque si lo rechaza no podrás presentarte."],
+    ["tv-handle", "Añadir el handle a la descripción de los vídeos de TV URJC", ""],
+  ]},
+  { id: "f6", title: "6 · Solicitud en la sede electrónica", when: "hasta el 18 de enero de 2027, 23:59", items: [
+    ["anexo5", "Anexo V firmado por todos los docentes de las asignaturas", 'Incluye la lista de asignaturas, los docentes informados y los autores con su porcentaje. <a href="textos.html#anexo5">Texto generado</a>.'],
+    ["s-asig", "Datos de cada asignatura", "Nombre con el código de 4 cifras (como en el aula virtual), titulación, URL del aula virtual, código de 7 cifras del Portal PDI (pestaña «Docencia») y créditos ECTS."],
+    ["s-autores", "Autores: identificador de correo sin @urjc.es y porcentaje", "Por ejemplo, <code>maria.zutanez 50%</code>."],
+    ["s-enlaces", "Enlaces: el handle de BURJC y la URL de la serie de TV URJC", ""],
+    ["s-justif", "Justificación de cada categoría según la rúbrica", "Di qué capítulo es, qué temas cubre, el porcentaje de temario, si hay soluciones y el nivel de detalle. Redáctala en un documento aparte antes de abrir el formulario."],
+    ["enviar", "Enviar la solicitud y guardar el justificante", "No se puede modificar una vez enviada. Si hay que corregir algo, se envía otra y cuenta la última."],
+  ]},
+  { id: "f7", title: "7 · Después de enviar", when: "febrero – abril 2027 (orientativo)", items: [
+    ["provisional", "Revisar el listado provisional de admitidos y excluidos", "Tras la publicación hay 10 días hábiles para subsanar."],
+    ["subsanar", "Subsanar en plazo si hace falta", "Normalmente, corrigiendo el mismo depósito."],
+    ["clasif", "Revisar la clasificación provisional (10 días hábiles para reclamar)", ""],
+    ["aula-abierta", "Crear la asignatura en abierto en el aula virtual", "Es obligatorio para tener derecho a los beneficios. Os mandarán instrucciones."],
+    ["3cursos", "Mantener y actualizar los materiales durante 3 cursos", "Siempre sobre el mismo depósito, para conservar el enlace."],
+    ["mentor-futuro", "(Opcional) Apuntarse como mentor/a o presentar en las Jornadas de Cultura Libre", ""],
+  ]},
+];
+
+const KEY = "checklist-2027";
+let state = {};
+try { state = JSON.parse(store.get(KEY) || "{}"); } catch (e) { state = {}; }
+
+const root = document.getElementById("phases");
+const toc = document.getElementById("phase-toc");
+root.innerHTML = PHASES.map(p => `
+  <section class="phase" id="${p.id}">
+    <div class="phase-head">
+      <h2>${p.title}</h2><span class="when">${p.when}</span>
+      <span class="phase-count" data-count="${p.id}"></span>
+    </div>
+    <ul class="check-list">
+      ${p.items.map(([id, t, d]) => `
+        <li><label class="check" data-id="${p.id}.${id}">
+          <input type="checkbox" data-id="${p.id}.${id}">
+          <span><span class="t">${t}</span>${d ? `<span class="d">${d}</span>` : ""}</span>
+        </label></li>`).join("")}
+    </ul>
+  </section>`).join("");
+toc.innerHTML = PHASES.map(p => `<a href="#${p.id}">${p.title}</a>`).join("");
+
+function render() {
+  let done = 0, total = 0;
+  document.querySelectorAll('input[type=checkbox][data-id]').forEach(cb => {
+    const on = !!state[cb.dataset.id];
+    cb.checked = on;
+    cb.closest(".check").classList.toggle("done", on);
+    total++; if (on) done++;
+  });
+  PHASES.forEach(p => {
+    const n = p.items.filter(([id]) => state[`${p.id}.${id}`]).length;
+    document.querySelector(`[data-count="${p.id}"]`).textContent = `${n}/${p.items.length}`;
+  });
+  document.getElementById("p-done").textContent = done;
+  document.getElementById("p-total").textContent = total;
+  document.getElementById("p-bar").style.width = (100 * done / total) + "%";
+}
+root.addEventListener("change", e => {
+  const id = e.target.dataset.id; if (!id) return;
+  if (e.target.checked) state[id] = true; else delete state[id];
+  store.set(KEY, JSON.stringify(state)); render();
+});
+document.getElementById("hide-done").addEventListener("change", e => {
+  document.body.classList.toggle("hide-done", e.target.checked);
+});
+document.getElementById("reset").addEventListener("click", () => {
+  if (confirm("¿Borrar todo el progreso del checklist?")) { state = {}; store.set(KEY, "{}"); render(); }
+});
+document.getElementById("export").addEventListener("click", () => {
+  const blob = new Blob([JSON.stringify(state, null, 1)], { type: "application/json" });
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
+  a.download = "checklist-abierto-2027.json"; a.click();
+});
+document.getElementById("import").addEventListener("change", async e => {
+  const f = e.target.files[0]; if (!f) return;
+  try { state = JSON.parse(await f.text()); store.set(KEY, JSON.stringify(state)); render(); showToast("Progreso importado ✓"); }
+  catch (err) { showToast("Fichero no válido"); }
+});
+// Enlace con progreso: #p=<índices marcados en base36>
+const ALL = PHASES.flatMap(p => p.items.map(([id]) => `${p.id}.${id}`));
+document.getElementById("share").addEventListener("click", async () => {
+  const code = ALL.map((id, i) => state[id] ? i.toString(36) : null).filter(x => x !== null).join(".");
+  const url = location.href.split("#")[0] + "#p=" + (code || "0-");
+  try { await navigator.clipboard.writeText(url); showToast("Enlace copiado ✓"); }
+  catch (e) { prompt("Copia este enlace:", url); }
+});
+const m = location.hash.match(/^#p=([0-9a-z.\-]*)$/);
+if (m) {
+  const ids = m[1] === "0-" ? [] : m[1].split(".").map(x => ALL[parseInt(x, 36)]).filter(Boolean);
+  const hasLocal = Object.keys(state).length > 0;
+  if (!hasLocal || confirm(`Este enlace trae ${ids.length} puntos marcados. ¿Sustituir tu progreso guardado en este navegador?`)) {
+    state = {}; ids.forEach(id => state[id] = true); store.set(KEY, JSON.stringify(state));
+    showToast("Progreso cargado desde el enlace ✓");
+  }
+  history.replaceState(null, "", location.pathname);
+}
+render();
+</script>
+</body>
+</html>

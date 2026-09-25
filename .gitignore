@@ -1,0 +1,9 @@
+.DS_Store
+*.aux
+*.log
+*.toc
+*.out
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+/plantilla-libro-latex/libro.pdf

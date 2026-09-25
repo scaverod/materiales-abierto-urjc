@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Textos listos para copiar</title>
+<meta name="description" content="Generador de nota de copyright, metadatos BURJC, datos.tex, Anexo V y declaración de IA.">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .gen { display: grid; grid-template-columns: minmax(0, 380px) minmax(0, 1fr); gap: 24px; align-items: start; }
+  .gen form { position: sticky; top: 76px; max-height: calc(100vh - 90px); overflow-y: auto; }
+  @media (max-width: 860px) { .gen { grid-template-columns: 1fr; } .gen form { position: static; max-height: none; } }
+</style>
+</head>
+<body>
+<header id="site-header"></header>
+<main>
+<div class="wrap">
+  <p class="eyebrow">Textos listos</p>
+  <h1>Rellena una vez, copia en todas partes</h1>
+  <p class="lead">Escribe tus datos a la izquierda y copia los textos que necesites: nota de copyright, metadatos de BURJC Digital, <code>datos.tex</code> para la plantilla, Anexo V, declaración de IA y los textos del formulario. Todo se queda en tu navegador; no se envía nada.</p>
+
+  <div class="gen">
+    <form class="card" id="f" onsubmit="return false">
+      <div class="field"><label for="nombre">Nombre temático</label><input type="text" id="nombre" placeholder="Estructuras de Datos"><small>Es el mismo nombre para el formulario, el título del depósito y el PDF.</small></div>
+      <div class="field"><label for="sub">Subtítulo del libro</label><input type="text" id="sub" value="Guía de estudio, apuntes, presentaciones y ejercicios"></div>
+      <div class="field"><label for="autores">Autores (uno por línea)</label>
+        <textarea id="autores" rows="3" placeholder="Nombre Apellido Apellido, usuario.correo, 50&#10;Otra Persona Apellido, otra.persona, 50"></textarea>
+        <small>Formato: <code>Nombre completo, usuario (sin @urjc.es), %</code></small></div>
+      <div class="field"><label for="docentes">Otros docentes de las asignaturas que no son autores (opcional)</label>
+        <textarea id="docentes" rows="2" placeholder="Nombre Apellido, usuario"></textarea></div>
+      <div class="field"><label for="asigs">Asignaturas, tal como aparecen en el aula virtual (una por línea)</label>
+        <textarea id="asigs" rows="3" placeholder="GRADO EN INGENIERIA DEL SOFTWARE (MOSTOLES) 2034 - ESTRUCTURAS DE DATOS - MAÑANA A G1 - 2Q"></textarea></div>
+      <div class="field"><label for="grados">Grados para la portada (uno por línea)</label>
+        <textarea id="grados" rows="2" placeholder="Grado en Ingeniería del Software (Móstoles)"></textarea></div>
+      <div class="grid grid-2" style="gap:10px">
+        <div class="field"><label for="anio">Año</label><input type="number" id="anio" value="2026"></div>
+        <div class="field"><label for="lic">Licencia</label><select id="lic"><option value="by-sa">CC BY-SA 4.0</option><option value="by">CC BY 4.0</option></select></div>
+      </div>
+      <div class="field"><label for="handle">Handle de BURJC (cuando lo tengas)</label><input type="url" id="handle" placeholder="https://hdl.handle.net/10115/…"></div>
+      <div class="field"><label for="serie">Serie de TV URJC (si hay vídeos o audios)</label><input type="url" id="serie" placeholder="https://tv.urjc.es/series/…"></div>
+      <div class="field"><label for="swhid">SWHID del software (si hay cat. 6)</label><input type="text" id="swhid" placeholder="swh:1:dir:…"></div>
+      <div class="field"><label for="ia">Uso de IA generativa (una línea por uso; vacío si no hay)</label>
+        <textarea id="ia" rows="3" placeholder="Correctores gramaticales y de estilo para la redacción final de toda la obra&#10;Generadores de imágenes para las figuras 3 y 7 a partir de descripciones de los autores"></textarea></div>
+      <button type="button" class="btn btn-sm" id="clear">Borrar datos</button>
+    </form>
+
+    <div id="outs"></div>
+  </div>
+</div>
+</main>
+<footer id="site-footer"></footer>
+<script src="assets/app.js"></script>
+<script>
+const F = ["nombre", "sub", "autores", "docentes", "asigs", "grados", "anio", "lic", "handle", "serie", "swhid", "ia"];
+const KEY = "textos-2027";
+let saved = {};
+try { saved = JSON.parse(store.get(KEY) || "{}"); } catch (e) {}
+F.forEach(id => { if (saved[id] !== undefined) document.getElementById(id).value = saved[id]; });
+
+const OUTS = [
+  ["copyright", "Nota de copyright (página 2 del libro, READMEs, última diapositiva)"],
+  ["titulo", "Título del depósito y nombre del PDF"],
+  ["desc", "Descripción de archivos para BURJC Digital"],
+  ["datostex", "datos.tex para la plantilla del libro"],
+  ["anexo5", "Anexo V: consentimiento de docentes"],
+  ["iadecl", "Declaración de uso de IA (Anexo VI)"],
+  ["form", "Datos para el formulario de la sede"],
+  ["tv", "Descripción para cada vídeo de TV URJC"],
+];
+document.getElementById("outs").innerHTML = OUTS.map(([id, t]) => `
+  <div class="out" id="${id}">
+    <div class="out-head"><h3>${t}</h3><button class="btn btn-sm" data-copy="o-${id}">Copiar</button></div>
+    <pre id="o-${id}"></pre>
+  </div>`).join("");
+
+const LIC = {
+  "by": ["Atribución 4.0 Internacional", "https://creativecommons.org/licenses/by/4.0/deed.es"],
+  "by-sa": ["Atribución-CompartirIgual 4.0 Internacional", "https://creativecommons.org/licenses/by-sa/4.0/deed.es"],
+};
+const lines = s => s.split("\n").map(x => x.trim()).filter(Boolean);
+const joinY = arr => arr.length <= 1 ? (arr[0] || "") : arr.slice(0, -1).join(", ") + " y " + arr[arr.length - 1];
+const texEsc = s => s.replace(/([&%$#_{}])/g, "\\$1");
+
+function gen() {
+  const v = {}; F.forEach(id => v[id] = document.getElementById(id).value);
+  store.set(KEY, JSON.stringify(v));
+  const nombre = v.nombre.trim() || "<Nombre temático>";
+  const simpl = (v.nombre.trim() || "Nombre temático").replace(/\s+/g, "_");
+  const autores = lines(v.autores).map(l => {
+    const p = l.split(",").map(x => x.trim());
+    return { nombre: p[0] || "", user: (p[1] || "").replace(/@urjc\.es$/, ""), pct: (p[2] || "").replace("%", "") };
+  });
+  const nombres = autores.map(a => a.nombre).filter(Boolean);
+  const autoresTxt = joinY(nombres) || "<Autores>";
+  const [licName, licUrl] = LIC[v.lic];
+  const handle = v.handle.trim() || "<handle de BURJC Digital>";
+  const ia = lines(v.ia);
+
+  const copyright =
+`Material docente en abierto de la Universidad Rey Juan Carlos
+©${v.anio} ${autoresTxt}
+Algunos derechos reservados
+Este documento se distribuye bajo la licencia
+“${licName}” de Creative Commons,
+disponible en
+${licUrl}`;
+  const titulo =
+`Título del depósito:  Materiales de la asignatura ${nombre}
+Nombre del PDF:       ${simpl}.pdf
+Autores (metadatos):  ${nombres.join("; ") || "<Autores>"}
+Licencia:             CC ${v.lic.toUpperCase()} 4.0 — ${licName}`;
+  let desc =
+`${simpl}.pdf: libro principal de la asignatura ${nombre}. Incluye la guía de estudio, los apuntes, las presentaciones y la colección de ejercicios y pruebas de evaluación con soluciones, organizados por categorías y temas.
+fuentes-editables.zip: ficheros fuente editables del libro (LaTeX, presentaciones y documentos de texto)${ia.length ? ", junto con los prompts y el procedimiento seguido con las herramientas de IA generativa" : ""}.`;
+  if (v.swhid.trim()) desc += `
+codigo-fuente.zip: programas de ordenador utilizados en la asignatura. Archivo con código fuente, depositado en Software Heritage con el SWHID ${v.swhid.trim()}. Incluye <qué tipo de software: plantillas y soluciones de las prácticas, programas de ejemplo…>.`;
+  desc += `
+<fichero>.mbz / .h5p: materiales para el aula virtual. <Qué elemento de Moodle incluye: glosario, cuestionario, lección…>.
+<fichero>: otros materiales. <Descripción; tipo de material: infografías, láminas…>.`;
+  if (ia.length) desc += `
+
+Este depósito incluye contenidos creados con herramientas de inteligencia artificial generativa (ver declaración en la segunda página del libro).`;
+
+  const datostex =
+`\\newcommand{\\nombreTematico}{${texEsc(nombre)}}
+\\newcommand{\\subtitulo}{${texEsc(v.sub)}}
+\\newcommand{\\autores}{${texEsc(autoresTxt)}}
+\\newcommand{\\autoresPortada}{${nombres.map(texEsc).join("\\\\ ") || "Autores"}}
+\\newcommand{\\titulaciones}{%
+${lines(v.grados).map(texEsc).join("\\\\\n") || "Grado en …"}%
+}
+\\newcommand{\\curso}{2026-2027}
+\\newcommand{\\anio}{${v.anio}}
+\\newcommand{\\licenciaCodigo}{${v.lic}}
+\\newcommand{\\handle}{${v.handle.trim() || "https://burjcdigital.urjc.es"}}
+\\newcommand{\\serieTV}{${v.serie.trim()}}`;
+
+  const docentes = [...autores.map(a => `${a.nombre}${a.user ? ", " + a.user + "@urjc.es" : ""}`), ...lines(v.docentes).map(l => {
+    const p = l.split(",").map(x => x.trim()); return `${p[0]}${p[1] ? ", " + p[1].replace(/@urjc\.es$/, "") + "@urjc.es" : ""}`;
+  })];
+  const anexo5 =
+`Este documento corresponde con una solicitud presentada a la Convocatoria de la Universidad Rey Juan Carlos para el reconocimiento de la publicación de materiales docentes en acceso abierto. Los materiales presentados en esa solicitud se imparten en las siguientes asignaturas:
+
+${lines(v.asigs).map(a => "    " + a).join("\n") || "    <GRADO EN … (CAMPUS) CÓDIGO - NOMBRE DE LA ASIGNATURA - GRUPO - CUATRIMESTRE>"}
+
+Los siguientes profesores y profesoras, con docencia en las mencionadas asignaturas, están debidamente informados de esta solicitud, y de los términos y condiciones de la mencionada Convocatoria:
+
+${docentes.map(d => "    " + d).join("\n") || "    <Nombre Apellidos, correo@urjc.es>"}
+
+Así mismo, entre ellos, los siguientes son autores de los materiales presentados a la Convocatoria, en los porcentajes aproximados que se indica:
+
+${autores.map(a => `    ${a.nombre}, ${a.user}@urjc.es, ${a.pct}%`).join("\n") || "    <Nombre Apellidos, correo@urjc.es, NN%>"}
+
+Y para que así conste, firman, a fecha de la firma electrónica.`;
+
+  const iadecl = ia.length
+    ? `Este libro incluye contenidos creados con herramientas de inteligencia artificial generativa:
+${ia.map(x => "  • " + x.replace(/\.$/, "") + ".").join("\n")}
+Todo el contenido ha sido cuidadosamente revisado, editado y validado por ${nombres.length > 1 ? "los autores, que asumen" : "el autor o la autora, que asume"} la plena responsabilidad sobre la versión final de la obra.`
+    : `(No has indicado ningún uso de IA. La declaración solo es obligatoria si has incluido contenido producido directamente por IA generativa.)`;
+
+  const form =
+`Nombre temático: ${nombre}
+Tipo: asignaturas ordinarias
+
+Autores (identificador y porcentaje):
+${autores.map(a => `${a.user} ${a.pct}%`).join("\n") || "usuario NN%"}
+
+Enlace BURJC Digital (categorías 0-3 y 6-8): ${handle}
+${v.serie.trim() ? "Serie TV URJC (categorías 4-5): " + v.serie.trim() + "\n" : ""}
+Por cada asignatura: nombre con código de 4 cifras · titulación · URL del aula virtual · código de 7 cifras (Portal PDI, pestaña «Docencia») · créditos ECTS
+
+Justificación por categoría (plantilla):
+Categoría 0. Guía de estudio: En el capítulo 1 del libro (${handle}) se presenta… Para cada uno de los N temas incluye el calendario y el plan de cada sesión (materiales, contenidos, objetivos, actividades y trabajo personal).
+Categoría 1. Apuntes: En el capítulo 2… cubren el 100 % del temario (temas 1-N) con un nivel de detalle que permite el estudio autónomo…
+Categoría 2. Presentaciones: En el capítulo 3… N presentaciones, una por tema, que cubren todo el temario…
+Categoría 3. Ejercicios: En el capítulo 4… N ejercicios y M exámenes de convocatorias anteriores, todos con solución, que cubren los temas 1-N…`;
+
+  const tv =
+`Materiales de la asignatura ${nombre}.
+Autoría: ${autoresTxt}.
+©${v.anio} ${autoresTxt}. Algunos derechos reservados. Este vídeo se distribuye bajo la licencia “${licName}” de Creative Commons: ${licUrl}
+Libro de la asignatura en BURJC Digital: ${handle}`;
+
+  const out = { copyright, titulo, desc, datostex, anexo5, iadecl, form, tv };
+  Object.entries(out).forEach(([k, t]) => document.getElementById("o-" + k).textContent = t);
+}
+document.getElementById("f").addEventListener("input", gen);
+document.getElementById("clear").addEventListener("click", () => {
+  if (!confirm("¿Borrar todos los datos del formulario?")) return;
+  F.forEach(id => { const el = document.getElementById(id); if (el.tagName === "SELECT") el.selectedIndex = 0; else if (id === "anio") el.value = 2026; else el.value = ""; });
+  gen();
+});
+gen();
+</script>
+</body>
+</html>

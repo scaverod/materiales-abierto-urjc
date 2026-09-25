@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El libro de la asignatura</title>
+<meta name="description" content="Cómo montar el único libro PDF que exige la convocatoria 2026-2027, con una plantilla lista para usar.">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header id="site-header"></header>
+<main>
+<div class="wrap narrow">
+  <p class="eyebrow">El libro</p>
+  <h1>Un único depósito, un único libro</h1>
+  <p class="lead">Este año todo lo bibliográfico va en <strong>un solo depósito</strong> de BURJC Digital. El elemento principal es un único PDF organizado como un libro, con portada, índice y un capítulo por categoría. Mi recomendación es usar la plantilla en Overleaf. <strong>No hace falta saber LaTeX</strong>: escribes tus datos, indicas qué PDF va en cada capítulo y el libro, con su índice, se genera solo.</p>
+
+  <div class="btn-row">
+    <a class="btn btn-primary" href="descargas/plantilla-libro-latex.zip" download>⬇ Descargar la plantilla del libro</a>
+    <a class="btn" href="descargas/ejemplo-libro-plantilla.pdf" target="_blank">👁 Ver el PDF que genera</a>
+    <a class="btn" href="https://hdl.handle.net/10115/165437" target="_blank">Ejemplo real: Estructuras de Datos</a>
+  </div>
+
+  <div class="toc">
+    <a href="#anatomia">Anatomía del depósito</a><a href="#estructura">Estructura del libro</a><a href="#overleaf">Plantilla paso a paso</a><a href="#carpetas">Organización de carpetas</a><a href="#sin-latex">Sin LaTeX</a><a href="#errores">Errores típicos</a>
+  </div>
+
+  <h2 id="anatomia">Anatomía del depósito en BURJC Digital</h2>
+  <div class="card tree">
+<pre style="border:0;background:none;padding:0">📦 Depósito: «Materiales de la asignatura &lt;Nombre temático&gt;»
+│
+├── 📘 Nombre_tematico.pdf          ← EL LIBRO (elemento principal)
+│      categorías 0-3 completas + resumen de 4-8
+│
+├── 🗜  fuentes-editables.zip        ← LaTeX / .pptx / .docx / .odp…
+│                                     (+ prompts y proceso si usaste IA)
+├── 💾 codigo-fuente.zip             ← cat. 6 · también en Software Heritage
+├── 🧩 cuestionarios.mbz, tema1.h5p  ← cat. 7 · importables en Moodle
+├── 📎 infografias.zip               ← cat. 8
+└── 📄 presentacion-tema1.pdf …      ← (opcional) partes sueltas del libro
+
+🎬 TV URJC (aparte): UNA serie con todos los vídeos y audios (cat. 4-5)</pre>
+  </div>
+  <p>En los metadatos, el <strong>título</strong> es «Materiales de la asignatura &lt;nombre temático&gt;». El <strong>resumen</strong> describe la asignatura. La <strong>descripción</strong> lleva una entrada por archivo que diga qué contiene y a qué categoría corresponde, usando el nombre de la categoría, no su número. Ejemplo:</p>
+  <pre>Estructuras_de_Datos.pdf: libro principal de la asignatura. Incluye la guía de estudio, los apuntes, las presentaciones y la colección de ejercicios y exámenes con soluciones.
+fuentes-editables.zip: ficheros fuente editables (LaTeX y PowerPoint) del libro.
+codigo-fuente.zip: programas de ordenador. Archivo con código fuente, depositado en Software Heritage con el SWHID swh:1:dir:… Incluye las plantillas y soluciones de las prácticas de laboratorio.</pre>
+  <p><a href="textos.html">Genera estos textos con tus datos →</a></p>
+
+  <h2 id="estructura">Estructura del libro</h2>
+  <ol>
+    <li><strong>Portada.</strong> Título, autores, fecha, «Material docente en abierto de la Universidad Rey Juan Carlos», asignatura(s) y grado(s), lugar de depósito y logo de la licencia.</li>
+    <li><strong>Página de créditos.</strong> Nota de copyright (© año y autores), «Algunos derechos reservados», licencia completa con enlace y, si procede, la <strong>declaración de IA</strong>.</li>
+    <li><strong>Índice.</strong> Por categorías o por temas. Tiene que quedar claro qué temas se desarrollan en cada categoría.</li>
+    <li><strong>Capítulos de las categorías 0 a 3.</strong> El contenido completo. Si lo organizas por categorías, dentro de cada una ordena por temas.</li>
+    <li><strong>Capítulo de vídeos y audios.</strong> La lista con el nombre de cada uno y la referencia a la serie de TV URJC.</li>
+    <li><strong>Capítulos de las categorías 6 a 8.</strong> Qué es cada programa o fichero, en qué temas se usa y, si es posible, una versión PDF.</li>
+  </ol>
+  <div class="callout info">La convocatoria dice que la portada y las primeras páginas «seguirán los modelos diseñados para la convocatoria» y que habrá un depósito de ejemplo. Cuando OfiLibre lo publique, compáralo con la portada de la plantilla y ajústala si hace falta. Los datos obligatorios ya están todos.</div>
+
+  <h2 id="overleaf">Utiliza la plantilla paso a paso</h2>
+  <p>La plantilla es una versión genérica del libro que usamos en <em>Estructuras de Datos</em>. Compila tal cual aunque todavía no hayas añadido tus PDF: donde falte uno, muestra un aviso.</p>
+  <ol class="steps">
+    <li><h3>Súbela a Overleaf</h3><p>New project → Upload project → selecciona el ZIP. Si lo prefieres, también funciona en local con <code>pdflatex</code> o <code>tectonic</code>.</p></li>
+    <li><h3>Rellena <code>datos.tex</code></h3><p>Nombre temático, autores, grados, año y licencia (<code>by</code> o <code>by-sa</code>). Lo puedes <a href="textos.html#datostex">generar en «Textos listos»</a>.</p></li>
+    <li><h3>Sube tus PDF a <code>materiales/</code></h3><p>Hay una carpeta por categoría. Usa nombres sin espacios ni tildes; el script <code>tools/quitar_tildes.py</code> los renombra por ti.</p></li>
+    <li><h3>Edita los capítulos</h3><p>En cada <code>capitulos/*.tex</code>, pon una línea por fichero: <code>\material{Título}{materiales/1-apuntes/tema01.pdf}{Descripción}</code>. En <code>libro.tex</code>, comenta con <code>%</code> las categorías que no presentes.</p></li>
+    <li><h3>Rellena la guía de estudio y la declaración de IA</h3><p>La tabla de sesiones del capítulo 0 sirve de ejemplo. Si no has usado IA para generar contenido, borra el bloque de la declaración.</p></li>
+    <li><h3>Compila y renombra</h3><p>Descarga el PDF y llámalo <code>Nombre_tematico.pdf</code>. El ZIP del proyecto Overleaf te sirve directamente como «fuentes editables».</p></li>
+  </ol>
+  <pre>% capitulos/2-presentaciones.tex
+\chapter{Presentaciones (Categoría 2)}
+\material{Tema 1. Introducción}{materiales/2-presentaciones/tema01.pdf}
+  {Motivación, conceptos básicos y organización del tema.}
+\material{Tema 2. Tipos abstractos de datos}{materiales/2-presentaciones/tema02.pdf}
+  {Especificación, interfaz e implementación.}</pre>
+
+  <h2 id="carpetas">Cómo organizar tus carpetas (lo que me ha funcionado)</h2>
+  <div class="grid grid-2">
+    <div class="card tree"><pre style="border:0;background:none;padding:0">Convocatoria-2027/
+├── 0-informacion/      convocatoria, Anexo V…
+├── 1-categorias/
+│   ├── 0-guia/         .pptx/.docx + .pdf
+│   ├── 1-apuntes/
+│   ├── 2-presentaciones/
+│   ├── 3-ejercicios/
+│   ├── 6-software/     README + zips de SWH
+│   └── libro/          ← proyecto LaTeX
+├── 2-deposito/         lo que se sube a BURJC
+├── 3-solicitud/        textos del formulario,
+│                       Anexo V firmado
+└── 4-resolucion/       listados, subsanación</pre></div>
+    <div>
+      <ul>
+        <li>Guarda <strong>fuentes y PDF juntos</strong> en cada categoría. Así el ZIP de editables sale solo.</li>
+        <li>Pon un <code>licencia.txt</code> con la nota de copyright en cada carpeta y en cada repositorio.</li>
+        <li>Guarda en <code>3-solicitud/</code> un <code>solicitud.txt</code> con todo lo que vas a pegar en el formulario: asignaturas, códigos, URL, autorías, handle y justificaciones. Te ahorra disgustos si la sesión de la sede caduca.</li>
+        <li>Para el software, crea un README general con una tabla por repositorio y su SWHID. Ese README en PDF es el que va al capítulo 6.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 id="sin-latex">¿Y si no quiero usar LaTeX?</h2>
+  <ul>
+    <li><strong>LibreOffice o Word:</strong> haz la portada, la página de créditos y el índice en un documento y exporta a PDF. Después concatena el resto de PDF.</li>
+    <li><strong>Concatenar PDF:</strong> en Mac, con Vista Previa (arrastra las miniaturas); en Linux o Mac, con <code>pdfunite portada.pdf t1.pdf t2.pdf libro.pdf</code>; en Windows, con PDFsam Basic (libre).</li>
+    <li>Añade marcadores o un índice con los números de página. Si no, quien evalúa no verá la organización por temas.</li>
+    <li>OfiLibre también ofrece <a href="https://ofilibre.urjc.es/guias/plantillas-asignaturas-abierto/">plantillas de LibreOffice y de LaTeX</a>.</li>
+  </ul>
+
+  <h2 id="errores">Errores típicos (vistos en convocatorias anteriores)</h2>
+  <div class="callout warn">
+    <ul style="margin:0">
+      <li><strong>«No se encuentran programas de ordenador en este depósito».</strong> Se presentó como cat. 6 una guía de Git o un PDF con enlaces a repositorios. El código tiene que ir en un ZIP adjunto.</li>
+      <li><strong>«El material no corresponde realmente a software».</strong> Lo mismo: esa guía encaja mejor en apuntes o ejercicios.</li>
+      <li><strong>Aula virtual sin versión importable.</strong> Los ejercicios de Moodle deben ir como fichero importable, en un archivo separado dentro del depósito.</li>
+      <li><strong>Autores o licencia distintos</strong> entre la portada y los metadatos de BURJC.</li>
+      <li><strong>Subir el último día.</strong> El handle sale al enviar, pero si la biblioteca pide cambios no te dará tiempo a corregir.</li>
+      <li><strong>Vídeos en YouTube</strong> o repartidos en varias series de TV URJC.</li>
+    </ul>
+  </div>
+</div>
+</main>
+<footer id="site-footer"></footer>
+<script src="assets/app.js"></script>
+</body>
+</html>

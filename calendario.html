@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calendario de trabajo</title>
+<meta name="description" content="Plan de trabajo recomendado, semana a semana, para la convocatoria de materiales en abierto 2026-2027.">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header id="site-header"></header>
+<main>
+<div class="wrap narrow">
+  <p class="eyebrow">Calendario</p>
+  <h1>Cómo organizarte hasta enero</h1>
+  <p class="lead">Este es un plan de trabajo con margen. Las fechas en rojo son oficiales; el resto son recomendaciones de mentoría. En verde tienes la etapa en la que estamos ahora.</p>
+
+  <div class="card ics-card">
+    <div>
+      <h3 style="margin:0 0 4px">📅 Llévate las fechas a tu calendario</h3>
+      <p style="margin:0;color:var(--muted);font-size:.93rem">Descarga un fichero .ics con avisos 7 días y 1 día antes. Funciona con Google Calendar, Outlook y Apple Calendar.</p>
+    </div>
+    <div class="btn-row" style="margin:12px 0 0">
+      <button class="btn btn-primary" id="ics-all">⬇ Todas las fechas</button>
+      <button class="btn" id="ics-oficial">⬇ Solo las oficiales</button>
+    </div>
+  </div>
+
+  <div class="callout tip"><strong>Truco:</strong> pon ya en tu calendario tres citas contigo: <em>1 de diciembre</em> (libro terminado), <em>15 de diciembre</em> (depósito enviado a BURJC) y <em>12 de enero</em> (solicitud enviada). Entre medias están las vacaciones y la biblioteca no trabaja.</div>
+
+  <ol class="timeline" id="tl">
+    <li class="key" data-from="2026-07-22" data-to="2026-08-23">
+      <div class="when">22 jul – 24 ago 2026</div>
+      <h3>Se publica la convocatoria y se abre el formulario</h3>
+      <p>Aprobada en el Consejo de Gobierno del 22 de julio. El formulario de la sede está abierto desde el 24 de agosto.</p>
+    </li>
+    <li data-from="2026-08-24" data-to="2026-10-04">
+      <div class="when">septiembre – primera semana de octubre</div>
+      <h3>Arranque: equipo, asignaturas y estrategia</h3>
+      <ul><li>Sesión de presentación (16 de septiembre): ve la grabación.</li><li>Primera reunión con tu mentor/a.</li><li>Decidid las asignaturas agrupadas, quién es responsable de actas, las autorías, los porcentajes y la licencia.</li><li>Haz inventario de lo que ya tenéis y marca a qué categoría va cada cosa. Usa la <a href="categorias.html#calculadora">calculadora</a>.</li></ul>
+    </li>
+    <li data-from="2026-10-05" data-to="2026-11-15">
+      <div class="when">octubre – mediados de noviembre</div>
+      <h3>Producción y limpieza de materiales</h3>
+      <ul><li>Escribe o actualiza la guía de estudio (cat. 0) con el plan de cada sesión.</li><li>Revisa las imágenes de terceros y cita todo lo que no sea vuestro.</li><li>Añade la portada o diapositiva de licencia a cada material y prepara los <code>licencia.txt</code>.</li><li>Graba los vídeos y súbelos a la serie de TV URJC. Prepara los repositorios con README y LICENSE, y deposítalos en Software Heritage.</li><li>Exporta los elementos de Moodle (.mbz y .h5p).</li></ul>
+    </li>
+    <li data-from="2026-11-16" data-to="2026-11-30">
+      <div class="when">16 – 30 nov</div>
+      <h3>Montaje del libro</h3>
+      <ul><li>Abre la <a href="libro.html">plantilla del libro</a> en Overleaf, rellena <code>datos.tex</code> e incluye todos los PDF.</li><li>Redacta los capítulos descriptivos de las categorías 4 a 8 y, si procede, la declaración de IA.</li><li>Prepara los ZIP de editables y de código.</li></ul>
+    </li>
+    <li class="key" data-from="2026-12-01" data-to="2026-12-07">
+      <div class="when">1 – 7 dic · objetivo interno</div>
+      <h3>Revisión con tu mentor/a</h3>
+      <p>Revisa la portada, la página 2, el índice, la cobertura del temario, las soluciones y los nombres de los ficheros. Pasa el <a href="pasos.html#f4">checklist de la fase 4</a>.</p>
+    </li>
+    <li class="key" data-from="2026-12-08" data-to="2026-12-18">
+      <div class="when">antes del 18 dic · recomendado</div>
+      <h3>Depósito en BURJC Digital</h3>
+      <p>Sube el libro y los adjuntos con los metadatos correctos. Si la biblioteca pide cambios, todavía tendrás tiempo antes de las vacaciones.</p>
+    </li>
+    <li data-from="2026-12-19" data-to="2027-01-06">
+      <div class="when">vacaciones de Navidad</div>
+      <h3>Colchón</h3>
+      <p>Mientras la biblioteca revisa el depósito, redacta las justificaciones por categoría y prepara el Anexo V para que lo firme todo el equipo.</p>
+    </li>
+    <li class="key" data-from="2027-01-07" data-to="2027-01-15">
+      <div class="when">15 ene 2027 · oficial</div>
+      <h3>Último día garantizado de tramitación en BURJC Digital</h3>
+      <p>Lo que se suba después puede no revisarse a tiempo, y un depósito rechazado no cuenta.</p>
+    </li>
+    <li class="key" data-from="2027-01-16" data-to="2027-01-18">
+      <div class="when">18 ene 2027, 23:59 · oficial</div>
+      <h3>Fin del plazo de solicitud</h3>
+      <p>Mejor envíala unos días antes. Añade el handle a las descripciones de los vídeos y guarda el justificante.</p>
+    </li>
+    <li data-from="2027-01-19" data-to="2027-03-31">
+      <div class="when">febrero – marzo 2027 (orientativo)</div>
+      <h3>Listado provisional y subsanación</h3>
+      <p>Se publica en el tablón electrónico. Hay <strong>10 días hábiles</strong> para subsanar. En años anteriores salió a finales de marzo.</p>
+    </li>
+    <li data-from="2027-04-01" data-to="2027-05-31">
+      <div class="when">abril – mayo 2027 (orientativo)</div>
+      <h3>Listado definitivo, clasificación e incentivos</h3>
+      <p>Hay 10 días hábiles para reclamar sobre la clasificación. Después se crea la asignatura en abierto en el aula virtual y se paga en nómina, una vez cumplidas las obligaciones.</p>
+    </li>
+    <li data-from="2027-06-01" data-to="2030-07-31">
+      <div class="when">cursos 2027-28 a 2029-30</div>
+      <h3>Tres cursos de mantenimiento</h3>
+      <p>Actualiza los materiales sobre el mismo depósito y conserva el derecho preferente a impartir la asignatura.</p>
+    </li>
+  </ol>
+</div>
+</main>
+<footer id="site-footer"></footer>
+<script src="assets/app.js"></script>
+<script>
+// Fechas exportables: [uid, título, descripción, inicio, fin|null (día completo), oficial]
+const EVENTS = [
+  ["libro", "Abierto 2027: libro terminado (objetivo)", "Libro montado con todos los PDF, portada, página de créditos e índice.", "2026-12-01", null, false],
+  ["mentor", "Abierto 2027: revisión con mentor/a", "Revisión de portada, página 2, índice, cobertura del temario y nombres de ficheros.", "2026-12-07", null, false],
+  ["deposito", "Abierto 2027: depósito en BURJC Digital (recomendado)", "Subir el libro y los adjuntos. Así la biblioteca puede revisarlo antes de las vacaciones.", "2026-12-18", null, false],
+  ["burjc", "Abierto 2027: último día garantizado en BURJC Digital", "Solo se garantiza la tramitación de lo subido a BURJC Digital hasta hoy, incluido.", "2027-01-15", null, true],
+  ["solicitud", "Abierto 2027: FIN DEL PLAZO DE SOLICITUD (23:59)", "Formulario en https://sede.urjc.es/convocatorias. Anexo V firmado, handle, serie de TV y justificaciones.", "20270118T220000Z", "20270118T225900Z", true],
+];
+function ics(list) {
+  const stamp = new Date().toISOString().replace(/[-:]/g, "").slice(0, 15) + "Z";
+  const esc = t => t.replace(/[,;\\]/g, m => "\\" + m);
+  const ev = list.map(([uid, t, d, a, b]) => {
+    const when = b ? `DTSTART:${a}\r\nDTEND:${b}`
+      : `DTSTART;VALUE=DATE:${a.replace(/-/g, "")}\r\nDTEND;VALUE=DATE:${new Date(new Date(a + "T12:00:00Z").getTime() + 864e5).toISOString().slice(0, 10).replace(/-/g, "")}`;
+    const alarm = h => `BEGIN:VALARM\r\nACTION:DISPLAY\r\nDESCRIPTION:${esc(t)}\r\nTRIGGER:-PT${h}H\r\nEND:VALARM`;
+    return `BEGIN:VEVENT\r\nUID:${uid}-abierto2027@urjc-mentoria\r\nDTSTAMP:${stamp}\r\n${when}\r\nSUMMARY:${esc(t)}\r\nDESCRIPTION:${esc(d)}\r\nURL:${location.href.replace(/[^/]*$/, "calendario.html")}\r\n${alarm(168)}\r\n${alarm(24)}\r\nEND:VEVENT`;
+  }).join("\r\n");
+  return `BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Mentoria URJC//Abierto 2027//ES\r\nCALSCALE:GREGORIAN\r\nX-WR-CALNAME:Convocatoria Abierto 2027\r\n${ev}\r\nEND:VCALENDAR\r\n`;
+}
+document.getElementById("ics-all").addEventListener("click", () => downloadFile("abierto-2027.ics", ics(EVENTS), "text/calendar"));
+document.getElementById("ics-oficial").addEventListener("click", () => downloadFile("abierto-2027-oficial.ics", ics(EVENTS.filter(e => e[5])), "text/calendar"));
+
+const now = new Date();
+document.querySelectorAll("#tl > li").forEach(li => {
+  const from = new Date(li.dataset.from + "T00:00:00"), to = new Date(li.dataset.to + "T23:59:59");
+  if (to < now) li.classList.add("past");
+  else if (from <= now && now <= to) li.classList.add("now");
+});
+</script>
+</body>
+</html>
