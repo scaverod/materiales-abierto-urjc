@@ -320,7 +320,7 @@ details > div p:first-child { margin-top: 0; }
 .shackle {
   position: absolute; left: 27px; top: 0; width: 96px; height: 110px; box-sizing: border-box;
   border: 17px solid #b9c0c9; border-bottom: 0; border-radius: 48px 48px 0 0;
-  box-shadow: inset 0 6px 0 rgba(255,255,255,.45), 0 4px 0 #8b939d;
+  box-shadow: inset 0 6px 0 rgba(255,255,255,.45);
   transform-origin: 8px 100%; animation: shackle 6s cubic-bezier(.5,0,.3,1) infinite;
 }
 .lock-body {
