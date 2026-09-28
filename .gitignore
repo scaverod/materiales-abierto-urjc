@@ -7,3 +7,4 @@
 *.fdb_latexmk
 *.fls
 /plantilla-libro-latex/libro.pdf
+.vscode/
