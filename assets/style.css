@@ -175,6 +175,9 @@ tr:last-child td { border-bottom: 0; }
 .steps > li::before { content: counter(s); position: absolute; left: 16px; top: 14px; width: 30px; height: 30px; border-radius: 50%; background: var(--accent); color: #fff; display: grid; place-items: center; font-weight: 800; font-size: .9rem; }
 .steps h3 { margin: 0 0 4px; font-size: 1.02rem; }
 .steps p { margin: 0; color: var(--muted); font-size: .94rem; }
+.by-step { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; font-size: .92rem; }
+.by-step > li { position: relative; padding-left: 62px; margin: 0; }
+.by-step > li::before { content: "Paso " attr(data-step); position: absolute; left: 0; top: 1px; font-size: .72rem; font-weight: 700; padding: 1px 7px; border-radius: 99px; background: var(--accent-soft); color: var(--accent-text); white-space: nowrap; }
 
 /* Checklist */
 .progress { position: sticky; top: 62px; z-index: 10; background: var(--bg); padding: 10px 0 12px; border-bottom: 1px solid var(--border); margin-bottom: 8px; }
