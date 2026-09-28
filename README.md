@@ -119,7 +119,7 @@ La web no usa cookies, analítica ni servidor. El progreso del checklist, la cal
 ## Créditos y licencia
 
 Desarrollado por [Sergio Cavero](https://servicios.urjc.es/pdi/ver/sergio.cavero) y ✳ Claudia.
-La plantilla del libro parte del libro de *Estructuras de Datos* (S. Cavero Díaz y S. Sánchez Alonso).
+La plantilla del libro es obra de Sergio Cavero Díaz.
 
 El contenido y la plantilla se distribuyen bajo licencia [Creative Commons Atribución-CompartirIgual 4.0 Internacional](LICENSE).
 La convocatoria y el Anexo V de `descargas/` son documentos oficiales públicos de la Universidad Rey Juan Carlos y se incluyen como copia de referencia. Los logotipos de la URJC y de OfiLibre pertenecen a sus titulares.

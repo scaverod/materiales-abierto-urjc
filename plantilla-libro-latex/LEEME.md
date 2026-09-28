@@ -32,4 +32,4 @@ Todo lo bibliográfico (categorías 0-3 y 6-8) va en **un solo depósito** de BU
 - Ficheros **importables en Moodle** (`.mbz`, `.h5p`, XML…) para la cat. 7.
 - Opcionalmente, PDF sueltos (por ejemplo, cada presentación) descritos como tales.
 
-Plantilla derivada del libro de *Estructuras de Datos* (S. Cavero Díaz y S. Sánchez Alonso). Licencia: CC BY-SA 4.0.
+Plantilla creada por Sergio Cavero Díaz. Licencia: CC BY-SA 4.0.
