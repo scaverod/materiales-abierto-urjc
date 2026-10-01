@@ -59,7 +59,7 @@ Desde 2026-27, todo el material bibliográfico va en **un único depósito** de 
 - **Un capítulo por categoría.** Cada PDF se incluye con una sola línea: `\material{Título}{ruta.pdf}{Descripción}`.
 - **Compila aunque falten ficheros.** Donde falte un PDF muestra un aviso, así que puedes montarlo poco a poco.
 
-Descárgala en [`descargas/plantilla-libro-latex.zip`](descargas/plantilla-libro-latex.zip), súbela a Overleaf y compila. También puedes ver [el PDF que genera](descargas/ejemplo-libro-plantilla.pdf).
+Ábrela directamente desde la [**galería de Overleaf**](https://www.overleaf.com/latex/templates/plantilla-del-libro-de-la-asignatura-materiales-docentes-en-acceso-abierto-urjc-2026-2027/dyzwsrcqkdyz) (*Open as Template*) o descárgala en [`descargas/plantilla-libro-latex.zip`](descargas/plantilla-libro-latex.zip), súbela a Overleaf y compila. También puedes ver [el PDF que genera](descargas/ejemplo-libro-plantilla.pdf).
 
 ## Estructura del repositorio
 

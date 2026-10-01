@@ -152,7 +152,7 @@ Marca cada punto cuando lo tengas. Si quieres llevarlo a una reunión de mentor�
 
 ## Fase 4 · Montar el libro (diciembre)
 
-- [ ] **Descargar la plantilla del libro y abrirla en Overleaf**: Guía del libro. También vale LibreOffice o Word si concatenas bien los PDF.
+- [ ] **Descargar la plantilla del libro y abrirla en Overleaf**: Plantilla en Overleaf (https://www.overleaf.com/latex/templates/plantilla-del-libro-de-la-asignatura-materiales-docentes-en-acceso-abierto-urjc-2026-2027/dyzwsrcqkdyz) · Guía del libro. También vale LibreOffice o Word si concatenas bien los PDF.
 - [ ] **Portada con todos los datos obligatorios**: Título, autores, fecha, «Material docente en abierto de la Universidad Rey Juan Carlos», asignatura(s) y grado(s), lugar de depósito y logo de la licencia.
 - [ ] **Página 2 con la nota de copyright y la licencia detallada**: © año, autores, «Algunos derechos reservados», nombre de la licencia y enlace.
 - [ ] **Declaración de IA en la 1.ª o 2.ª página tras la portada (si procede)**: Debe recoger el tipo de herramienta, la forma de uso y el grado, y dejar claro que todo lo revisaron y validaron los autores.
@@ -336,7 +336,7 @@ El libro
 
 # Un único depósito, un único libro
 Este año todo lo bibliográfico va en un solo depósito de BURJC Digital. El elemento principal es un único PDF organizado como un libro, con portada, índice y un capítulo por categoría. Mi recomendación es usar la plantilla en Overleaf. No hace falta saber LaTeX: escribes tus datos, indicas qué PDF va en cada capítulo y el libro, con su índice, se genera solo.
- ⬇ Descargar la plantilla del libro 👁 Ver el PDF que genera Ejemplo real: Estructuras de Datos
+ 🍃 Abrir la plantilla en Overleaf (https://www.overleaf.com/latex/templates/plantilla-del-libro-de-la-asignatura-materiales-docentes-en-acceso-abierto-urjc-2026-2027/dyzwsrcqkdyz) ⬇ Descargar el ZIP 👁 Ver el PDF que genera Ejemplo real: Estructuras de Datos
  Anatomía del depósitoEstructura del libroPlantilla paso a pasoOrganización de carpetasSin LaTeXErrores típicos
 
 ## Anatomía del depósito en BURJC Digital
@@ -381,8 +381,8 @@ La plantilla es una versión genérica del libro que usamos en Estructuras de Da
 
 -
 
-### Súbela a Overleaf
-New project → Upload project → selecciona el ZIP. Si lo prefieres, también funciona en local con pdflatex o tectonic.
+### Ábrela en Overleaf
+Entra en la plantilla publicada en Overleaf (https://www.overleaf.com/latex/templates/plantilla-del-libro-de-la-asignatura-materiales-docentes-en-acceso-abierto-urjc-2026-2027/dyzwsrcqkdyz) y pulsa Open as Template: se crea una copia en tu cuenta. También puedes descargar el ZIP y subirlo con New project → Upload project. Si lo prefieres, también funciona en local con pdflatex o tectonic.
 -
 
 ### Rellena datos.tex
@@ -754,7 +754,7 @@ octubre – mediados de noviembre
 
 ### Montaje del libro
 
-- Abre la plantilla del libro en Overleaf, rellena datos.tex e incluye todos los PDF.
+- Abre la plantilla del libro en Overleaf (https://www.overleaf.com/latex/templates/plantilla-del-libro-de-la-asignatura-materiales-docentes-en-acceso-abierto-urjc-2026-2027/dyzwsrcqkdyz), rellena datos.tex e incluye todos los PDF.
 - Redacta los capítulos descriptivos de las categorías 4 a 8 y, si procede, la declaración de IA.
 - Prepara los ZIP de editables y de código.
 -

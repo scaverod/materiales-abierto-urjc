@@ -5,7 +5,9 @@ Todo lo bibliográfico (categorías 0-3 y 6-8) va en **un solo depósito** de BU
 
 ## Uso rápido en Overleaf
 
-1. Overleaf → *New project* → *Upload project* → sube este ZIP.
+1. Abre la plantilla en la galería de Overleaf y pulsa *Open as Template*:
+   https://www.overleaf.com/latex/templates/plantilla-del-libro-de-la-asignatura-materiales-docentes-en-acceso-abierto-urjc-2026-2027/dyzwsrcqkdyz
+   (o bien: Overleaf → *New project* → *Upload project* → sube este ZIP).
 2. Edita `datos.tex`: nombre temático, autores, grados, año, licencia (`by` o `by-sa`).
    También puedes generarlo desde la web, en la sección «Textos listos».
 3. Sube tus PDF a `materiales/<categoría>/`. Usa nombres **sin espacios ni tildes**

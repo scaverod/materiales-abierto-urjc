@@ -21,7 +21,8 @@
   <p class="lead">Este año todo lo bibliográfico va en <strong>un solo depósito</strong> de BURJC Digital. El elemento principal es un único PDF organizado como un libro, con portada, índice y un capítulo por categoría. Mi recomendación es usar la plantilla en Overleaf. <strong>No hace falta saber LaTeX</strong>: escribes tus datos, indicas qué PDF va en cada capítulo y el libro, con su índice, se genera solo.</p>
 
   <div class="btn-row">
-    <a class="btn btn-primary" href="descargas/plantilla-libro-latex.zip" download>⬇ Descargar la plantilla del libro</a>
+    <a class="btn btn-primary" href="https://www.overleaf.com/latex/templates/plantilla-del-libro-de-la-asignatura-materiales-docentes-en-acceso-abierto-urjc-2026-2027/dyzwsrcqkdyz" target="_blank" rel="noopener">🍃 Abrir la plantilla en Overleaf</a>
+    <a class="btn" href="descargas/plantilla-libro-latex.zip" download>⬇ Descargar el ZIP</a>
     <a class="btn" href="descargas/ejemplo-libro-plantilla.pdf" target="_blank">👁 Ver el PDF que genera</a>
     <a class="btn" href="https://hdl.handle.net/10115/165437" target="_blank">Ejemplo real: Estructuras de Datos</a>
   </div>
@@ -66,7 +67,7 @@ codigo-fuente.zip: programas de ordenador. Archivo con código fuente, depositad
   <h2 id="overleaf">Utiliza la plantilla paso a paso</h2>
   <p>La plantilla es una versión genérica del libro que usamos en <em>Estructuras de Datos</em>. Compila tal cual aunque todavía no hayas añadido tus PDF: donde falte uno, muestra un aviso.</p>
   <ol class="steps">
-    <li><h3>Súbela a Overleaf</h3><p>New project → Upload project → selecciona el ZIP. Si lo prefieres, también funciona en local con <code>pdflatex</code> o <code>tectonic</code>.</p></li>
+    <li><h3>Ábrela en Overleaf</h3><p>Entra en la <a href="https://www.overleaf.com/latex/templates/plantilla-del-libro-de-la-asignatura-materiales-docentes-en-acceso-abierto-urjc-2026-2027/dyzwsrcqkdyz" target="_blank" rel="noopener">plantilla publicada en Overleaf</a> y pulsa <em>Open as Template</em>: se crea una copia en tu cuenta. También puedes descargar el ZIP y subirlo con New project → Upload project. Si lo prefieres, también funciona en local con <code>pdflatex</code> o <code>tectonic</code>.</p></li>
     <li><h3>Rellena <code>datos.tex</code></h3><p>Nombre temático, autores, grados, año y licencia (<code>by</code> o <code>by-sa</code>). Lo puedes <a href="textos.html#datostex">generar en «Textos listos»</a>.</p></li>
     <li><h3>Sube tus PDF a <code>materiales/</code></h3><p>Hay una carpeta por categoría. Usa nombres sin espacios ni tildes; el script <code>tools/quitar_tildes.py</code> los renombra por ti.</p></li>
     <li><h3>Edita los capítulos</h3><p>En cada <code>capitulos/*.tex</code>, pon una línea por fichero: <code>\material{Título}{materiales/1-apuntes/tema01.pdf}{Descripción}</code>. En <code>libro.tex</code>, comenta con <code>%</code> las categorías que no presentes.</p></li>
