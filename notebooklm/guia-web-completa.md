@@ -123,7 +123,8 @@ Marca cada punto cuando lo tengas. Si quieres llevarlo a una reunión de mentor�
 - [ ] **Pedir mentor/a (con copia a ofilibre@urjc.es)**: Escribe directamente a tu mentor/a o pide a OfiLibre que te asignen uno.
 - [ ] **Identificar las asignaturas del aula virtual que comparten materiales**: Los grupos de la misma asignatura o las asignaturas iguales en varios grados se presentan como una única solicitud agrupada.
 - [ ] **Confirmar quién es responsable de actas**: Solo esa persona puede enviar la solicitud (en asignaturas ordinarias). En las extraordinarias, como el TFG, la envía una persona autora.
-- [ ] **Listar a los docentes del POD 2026-27 y a los autores de los materiales**: Para cobrar hay que impartir la asignatura este curso y ser autor de algún material con puntos.
+- [ ] **Listar a todos los docentes de las asignaturas declaradas**: Todos, sean o no autores, firman el Anexo V de consentimiento. La convocatoria habla de «todos los profesores de las asignaturas», no solo de quienes figuran en el POD.
+- [ ] **Listar a los autores y comprobar quién tendrá derecho a beneficios**: Hay que ser autor de algún material con más de 0 puntos y, en asignaturas ordinarias, docente de alguna asignatura declarada según el POD 2026-27 (apartado 7). En TFG o prácticas basta con ser autor.
 - [ ] **Acordar el porcentaje de autoría de cada autor**: La suma puede ser menor que el 100 % si hay autores sin derecho a incentivo.
 - [ ] **Elegir la licencia: CC BY 4.0 o CC BY-SA 4.0**: Tiene que estar de acuerdo todo el equipo. Para el software, cualquier licencia aprobada por la OSI.
 - [ ] **Comprobar si la asignatura ya se presentó en los dos últimos cursos**: Si fue reconocida, cada categoría debe ser al menos un 80 % distinta. Si al menos el 50 % se basa en material ya incentivado, no hay dinero (aunque sí reconocimiento).
@@ -142,7 +143,7 @@ Marca cada punto cuando lo tengas. Si quieres llevarlo a una reunión de mentor�
 - [ ] **Actualizar los materiales al curso 2026-27**: Fechas, calendario y bibliografía.
 - [ ] **Revisar las imágenes, figuras y textos de terceros**: Deben ser tuyos, tener licencia libre, contar con permiso o estar amparados por el derecho de cita. Cítalos siempre y elimina lo dudoso.
 - [ ] **Quitar datos personales de estudiantes**: Nada de nombres, notas, caras ni foros con alumnos.
-- [ ] **Marcar cada material con la licencia**: En los documentos, portada y nota de copyright; en las presentaciones, una diapositiva final; en los vídeos, una cortinilla (añádela a todos de una vez); en los audios, una locución.
+- [ ] **Marcar cada material con la licencia**: En los documentos, portada y nota de copyright; en las presentaciones, la primera o la última diapositiva; en los vídeos, una cortinilla (añádela a todos de una vez); en los audios, una locución.
 - [ ] **Anotar si has usado IA generativa y cómo**: Si hay contenido generado con IA, necesitas la declaración del Anexo VI y guardar los prompts y el proceso para el ZIP de editables.
 - [ ] **Vídeos y audios: subirlos a una única serie de TV URJC**: Sigue el procedimiento de TV URJC. YouTube no vale.
 - [ ] **Vídeos: título por tema, autoría, licencia y descripción**: La descripción debe incluir «Materiales de la asignatura » y el handle del libro (añádelo cuando lo tengas).
@@ -232,7 +233,7 @@ Las categorías 1 a 8 se puntúan por separado con 0, 5, 8 o 14 puntos. Se suman
 📘 Dentro del libro · BURJC Digital
 
 - Las diapositivas de las sesiones de explicación.
-- Añade una diapositiva final con la licencia en cada presentación.
+- Indica la licencia en cada presentación, en la primera o en la última diapositiva.
 
 3
 
@@ -248,7 +249,7 @@ Las categorías 1 a 8 se puntúan por separado con 0, 5, 8 o 14 puntos. Se suman
 🎬 TV URJC (una sola serie) · listados en el libro
 
 - Tienen que estar creados específicamente para explicar un tema. Las grabaciones de clase como mucho dan 5 puntos.
-- Cortinilla con los datos y la licencia al principio o al final; la declaración de IA, justo después de la cortinilla.
+- Al principio, una cortinilla con los datos y la licencia; justo después, la declaración de IA si procede; al final, los créditos con la licencia detallada.
 
 5
 
@@ -257,6 +258,8 @@ Las categorías 1 a 8 se puntúan por separado con 0, 5, 8 o 14 puntos. Se suman
 
 - Cada uno debe explicar un tema concreto.
 - No cuentan las lecturas de textos que ya están en otras categorías ni las pistas de audio de los vídeos.
+- Al principio, una locución con los datos y la licencia; justo después, la declaración de IA si procede; al final, una locución con la licencia detallada.
+- Un audio generado automáticamente a partir de tus apuntes puntúa la mitad y no cuenta para llegar a los 28 puntos.
 
 6
 
