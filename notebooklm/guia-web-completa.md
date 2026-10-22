@@ -147,7 +147,7 @@ Marca cada punto cuando lo tengas. Si quieres llevarlo a una reunión de mentor�
 - [ ] **Anotar si has usado IA generativa y cómo**: Si hay contenido generado con IA, necesitas la declaración del Anexo VI y guardar los prompts y el proceso para el ZIP de editables.
 - [ ] **Vídeos y audios: subirlos a una única serie de TV URJC**: Sigue el procedimiento de TV URJC. YouTube no vale.
 - [ ] **Vídeos: título por tema, autoría, licencia y descripción**: La descripción debe incluir «Materiales de la asignatura » y el handle del libro (añádelo cuando lo tengas).
-- [ ] **Software: repositorio público con README y LICENSE (OSI)**: Tiene que ser código de verdad. Una guía con enlaces no cuenta (motivo de exclusión en años anteriores).
+- [ ] **Software: repositorio público con README y LICENSE (OSI)**: Hace falta para archivarlo en Software Heritage, que solo guarda repositorios públicos. Después el código va en un adjunto propio del depósito de BURJC, no en el ZIP de editables. Tiene que ser código de verdad: una guía con enlaces no cuenta.
 - [ ] **Software: depositarlo en Software Heritage y obtener el SWHID y el tar.gz**: Usa Save code now o la extensión del navegador.
 - [ ] **Aula virtual: exportar los elementos importables**: Copias de seguridad .mbz, ficheros .h5p o XML de preguntas y glosarios, cada uno en un archivo separado.
 
