@@ -13,7 +13,11 @@ Todo lo bibliográfico (categorías 0-3 y 6-8) va en **un solo depósito** de BU
 3. Sube tus PDF a `materiales/<categoría>/`. Usa nombres **sin espacios ni tildes**
    (en local puedes lanzar `python3 tools/quitar_tildes.py` dentro de la carpeta).
 4. En cada `capitulos/*.tex`, pon una línea `\material{Título}{ruta.pdf}{Descripción}` por fichero.
-   Si falta un PDF, el libro compila igualmente y muestra un aviso en rojo.
+   Las líneas que trae la plantilla (`tema01.pdf`, `tema02.pdf`…) son ejemplos: por eso,
+   al abrirla, ves recuadros rojos «Aquí irá tu PDF». No son errores: indican que esa
+   ruta todavía no tiene fichero. Cada recuadro desaparece solo cuando subes el PDF con
+   ese nombre a esa carpeta (o cambias la ruta al nombre de tu fichero). Si no tienes
+   ese material, borra la línea `\material`.
 5. En `libro.tex`, comenta con `%` los capítulos de las categorías que no presentes.
 6. Compila con **pdfLaTeX** y descarga el PDF.
 7. Renómbralo como `<Nombre_tematico>.pdf`: el nombre temático con guiones bajos

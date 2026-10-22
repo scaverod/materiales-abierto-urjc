@@ -70,9 +70,18 @@
   \IfFileExists{#2}{%
     \includepdf[pages=-,pagecommand={\thispagestyle{plain}}]{#2}%
   }{%
-    \begin{tcolorbox}[colback=urjcRed!5,colframe=urjcRed,title=Falta el fichero]
-      No se encontró \texttt{\detokenize{#2}}. Cópialo en esa ruta
-      (sin espacios ni tildes en el nombre: usa \texttt{tools/quitar\_tildes.py}).
+    \begin{tcolorbox}[colback=urjcRed!5,colframe=urjcRed,
+        title=Aquí irá tu PDF (aviso de la plantilla)]
+      En este punto se insertarán las páginas de
+      \texttt{\detokenize{#2}}, pero ese fichero todavía no está en el proyecto.
+      Este recuadro es solo un aviso y desaparece solo:
+      \begin{itemize}[nosep,leftmargin=1.2em]
+        \item Sube tu PDF a esa carpeta con ese nombre y vuelve a compilar.
+        \item Si tu fichero se llama de otra forma, cambia la ruta en la línea
+              \texttt{\textbackslash material} del capítulo.
+        \item Si no tienes este material, borra esa línea.
+      \end{itemize}
+      Usa nombres sin espacios ni tildes (\texttt{tools/quitar\_tildes.py} los renombra).
     \end{tcolorbox}%
   }%
 }
@@ -121,12 +130,7 @@
   \vspace{0.2cm}
   {\sffamily\small Depositado en BURJC Digital: \url{\handle}\par}
   \vspace{0.8cm}
-  \begin{minipage}[c]{0.3\textwidth}\centering
-    \includegraphics[width=0.75\textwidth]{img/p-trans.png}
-  \end{minipage}\hfill
-  \begin{minipage}[c]{0.3\textwidth}\centering
-    \licenciaLogo[1.2cm]
-  \end{minipage}
+  \licenciaLogo[1.2cm]
 \end{titlepage}
 
 % =====================================================================

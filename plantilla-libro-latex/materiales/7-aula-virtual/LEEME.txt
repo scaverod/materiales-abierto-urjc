@@ -1,1 +1,5 @@
 Copia aquí los PDF de esta categoría (nombres sin espacios ni tildes).
+Luego, en el capítulo correspondiente de capitulos/, pon una línea
+\material{Título}{materiales/7-aula-virtual/<fichero>.pdf}{Descripción}
+por cada PDF. Mientras el fichero no exista, el libro muestra en su lugar
+un recuadro rojo «Aquí irá tu PDF»; desaparece al subirlo.

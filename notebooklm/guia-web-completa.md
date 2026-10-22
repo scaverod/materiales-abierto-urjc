@@ -394,7 +394,7 @@ Hay una carpeta por categoría. Usa nombres sin espacios ni tildes; el script to
 -
 
 ### Edita los capítulos
-En cada capitulos/*.tex, pon una línea por fichero: \material{Título}{materiales/1-apuntes/tema01.pdf}{Descripción}. En libro.tex, comenta con % las categorías que no presentes.
+En cada capitulos/*.tex, pon una línea por fichero: \material{Título}{materiales/1-apuntes/tema01.pdf}{Descripción}. Las líneas que trae la plantilla son ejemplos, así que al abrirla verás recuadros rojos «Aquí irá tu PDF»: no son errores, solo marcan dónde irá cada fichero y desaparecen al subir el PDF con ese nombre (o al cambiar la ruta por la del tuyo). Si no tienes ese material, borra la línea. En libro.tex, comenta con % las categorías que no presentes.
 -
 
 ### Rellena la guía de estudio y la declaración de IA

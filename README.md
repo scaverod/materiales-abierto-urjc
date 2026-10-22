@@ -122,4 +122,4 @@ Desarrollado por [Sergio Cavero](https://servicios.urjc.es/pdi/ver/sergio.cavero
 La plantilla del libro es obra de Sergio Cavero Díaz.
 
 El contenido y la plantilla se distribuyen bajo licencia [Creative Commons Atribución-CompartirIgual 4.0 Internacional](LICENSE).
-La convocatoria y el Anexo V de `descargas/` son documentos oficiales públicos de la Universidad Rey Juan Carlos y se incluyen como copia de referencia. Los logotipos de la URJC y de OfiLibre pertenecen a sus titulares.
+La convocatoria y el Anexo V de `descargas/` son documentos oficiales públicos de la Universidad Rey Juan Carlos y se incluyen como copia de referencia. El logotipo de la URJC pertenece a sus titulares.
