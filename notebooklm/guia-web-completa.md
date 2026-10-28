@@ -585,10 +585,11 @@ Tus ficheros no salen de tu ordenador. Todo se procesa en el navegador, en Windo
 2. Revisa tus datos: título común (o un título por fichero, sacado de su nombre), autores, asignatura, grados, fecha, año, licencia, serie de TV URJC y, si el contenido se ha hecho con IA, los usos de IA. Si rellenaste Textos listos, aparecen solos.
 3. Vídeos: elige la portada (generada con tus datos o tu propia imagen), los créditos finales (generados con la nota de copyright, tu imagen o ninguno), si añadir la declaración de IA tras la portada y cuántos segundos dura cada cosa. Hay vista previa. Audios: revisa los textos de entrada y cierre, y elige si los lee una voz sintética (cuatro voces en español) o los grabas con tu micrófono (o subes una grabación).
 4. Elige la carpeta (o los ficheros sueltos).
-5. Pulsa «Añadir a todos». En Chrome y Edge puedes elegir una carpeta de destino; en Firefox y Safari se descargan uno a uno.
+5. Pulsa «Generar» (el botón dice cuántos vídeos o audios se van a preparar). Una barra muestra el progreso de todos y la lista, el estado de cada fichero.
 
 ## Preguntas frecuentes
 - ¿Cuánto tarda? Con vídeos MP4 normales (H.264), los de Zoom, Teams, OBS, Camtasia, PowerPoint o la mayoría de cámaras, unos segundos por vídeo: solo se genera la portada y se pega delante sin tocar el resto, así que no se pierde calidad. Si el vídeo está en otro formato (por ejemplo, HEVC de iPhone o AVI), hay que recodificarlo entero y tarda bastante más.
+- ¿Dónde se guardan los resultados? En Chrome y Edge, al pulsar «Generar» eliges una carpeta y se guardan ahí, con el mismo nombre que el original. Tiene que ser distinta de la de los originales; si eliges la misma, la herramienta te avisa. En Firefox y Safari, al terminar se descarga un único ZIP con todos. Los originales no se tocan. Si dos ficheros acabarían con el mismo nombre (por ejemplo, de subcarpetas distintas, o clase.mov y clase.mp4), el segundo se guarda como «clase (2).mp4». Si cancelas a mitad, los que ya estaban hechos se guardan igualmente.
 - ¿Hay un límite de tamaño? Con vídeos de más de 2 GB puede fallar. Si te pasa, divídelos o expórtalos con menos resolución (1080p es suficiente).
 - Los audios: ¿voz sintética o mi voz? Las dos valen. Grabar tu voz queda más natural; la voz sintética es más cómoda porque lee el título de cada audio. Solo se usa en la entrada y el cierre, no en el contenido del audio.
 
