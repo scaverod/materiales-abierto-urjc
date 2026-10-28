@@ -399,6 +399,12 @@ details > div p:first-child { margin-top: 0; }
 .tool-status { color: var(--muted); font-size: .9rem; align-self: center; }
 #engine:empty { display: none; }
 .tool-log { margin-top: 12px; }
+.tool-progress { margin: 14px 0 4px; }
+.tool-progress .progress-meta { font-size: .9rem; color: var(--muted); }
+.tool-progress .progress-meta span { overflow-wrap: anywhere; }
+.tool-said { font-size: .88rem; color: var(--text); background: var(--surface-2); border-left: 3px solid var(--accent); border-radius: 6px; padding: 8px 12px; margin-top: 6px; }
+.tool-said:empty { display: none; }
+.tool-said strong { display: block; font-size: .78rem; color: var(--muted); margin-bottom: 2px; }
 .tool-log pre { max-height: 260px; overflow: auto; font-size: .75rem; }
 .rec h3 { margin: 0; font-size: 1rem; }
 .rec audio, #a-player { width: 100%; margin-top: 4px; }

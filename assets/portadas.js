@@ -124,8 +124,16 @@ function refreshTexts(force) {
   ["entrada", "cierre"].forEach(k => { if (force || !S.textsDirty[k]) { $("#a-" + k).value = t[k]; S.textsDirty[k] = false; } });
 }
 function spokenEntrada(f, d) {
-  const title = titleFor(f, d);
+  const title = S.voz === "mic" ? d.coleccion : titleFor(f, d);
   return $("#a-entrada").value.replace(/\{titulo\}/g, title).trim();
+}
+// Debajo del texto de entrada: cómo queda con el hueco {titulo} relleno
+function renderSaid() {
+  const el = $("#a-entrada-said"), d = data();
+  if (!$("#a-entrada").value.includes("{titulo}")) { el.innerHTML = ""; return; }
+  const f = S.files[0] || { title: d.coleccion };
+  const who = S.voz === "mic" ? "Lo que leerás al grabar:" : S.files[0] ? `Así sonará en «${esc(S.files[0].file.name)}»:` : "Así sonará (con el título común, hasta que elijas los ficheros):";
+  el.innerHTML = `<strong>${who}</strong>${esc(spokenEntrada(f, d))}`;
 }
 
 /* ---------- Diapositivas (canvas) ---------- */
@@ -427,14 +435,14 @@ async function processVideo(f, d, setMsg) {
     const P = videoPlan(await probe(src));
     const { v } = P;
     if (P.mode === "mp4") {
-      setMsg("Generando portada…");
+      setMsg("Generando portada…", 0.15);
       const ext = "mp4", { pre, post } = await slidesFor(f, d, v.width, v.height);
       await encodeSegment(pre, P, `/intro.${ext}`);
       if (post.length) await encodeSegment(post, P, `/outro.${ext}`);
       const list = ["ffconcat version 1.0", `file ${quote("/intro." + ext)}`, `file ${quote(src)}`];
       if (post.length) list.push(`file ${quote("/outro." + ext)}`);
       await ff.writeFile("/list.txt", list.join("\n") + "\n");
-      setMsg("Uniendo…");
+      setMsg("Uniendo…", 0.75);
       const out = `/out.${ext}`;
       await run(["-y", "-f", "concat", "-safe", "0", "-i", "/list.txt", "-map", "0:v:0", "-map", "0:a:0?", "-c", "copy", ...metaArgs(f, d), out]);
       const bytes = await ff.readFile(out);
@@ -569,11 +577,11 @@ async function voiceClip(kind, f, d, st) {
 
 async function processAudio(f, d, setMsg) {
   const withOutro = $("#a-concierre").checked;
-  setMsg(S.voz === "sint" ? "Generando la voz…" : "Preparando…");
+  setMsg(S.voz === "sint" ? "Generando la voz…" : "Preparando…", 0.1);
   const msgEl = { set textContent(t) { setMsg(t); } };
   const vin = await voiceClip("entrada", f, d, msgEl);
   const vout = withOutro ? await voiceClip("cierre", f, d, msgEl) : null;
-  setMsg("Uniendo…");
+  setMsg("Uniendo…", 0.6);
   return withInput(f.file, async src => {
     const info = await probe(src);
     const a = info.streams.find(s => s.codec_type === "audio");
@@ -644,7 +652,7 @@ function addFiles(list) {
   files.sort((a, b) => (a.webkitRelativePath || a.name).localeCompare(b.webkitRelativePath || b.name, "es", { numeric: true }));
   S.files = files.map(file => ({ file, title: titleFromName(file.name), state: "pend", msg: "" }));
   renderList(skipped);
-  renderPreview(); updateGo();
+  renderPreview(); renderSaid(); updateGo();
 }
 function renderList(skipped = 0) {
   const box = $("#f-lista");
@@ -663,7 +671,7 @@ function renderList(skipped = 0) {
 }
 function stateHTML(f) {
   const lbl = { pend: "Pendiente", run: "…", ok: "✓ Hecho", err: "✗ Error" }[f.state];
-  return `<span>${lbl}</span>${f.msg ? `<small>${esc(f.msg)}</small>` : ""}${f.state === "run" ? `<div class="tool-bar"><div style="width:${Math.round((f.p || 0) * 100)}%"></div></div>` : ""}${f.url ? `<a class="btn btn-sm" href="${f.url}" download="${esc(f.outName)}">Descargar</a>` : ""}`;
+  return `<span>${lbl}</span>${f.msg ? `<small>${esc(f.msg)}</small>` : ""}${f.state === "run" ? `<div class="tool-bar"><div style="width:${Math.round((f.p || 0) * 100)}%"></div></div>` : ""}`;
 }
 function setState(i, state, msg, p) {
   const f = S.files[i]; f.state = state; if (msg !== undefined) f.msg = msg; f.p = p;
@@ -672,52 +680,111 @@ function setState(i, state, msg, p) {
 }
 
 /* ---------- Salida ---------- */
-async function save(res) {
-  if (S.outDir) {
-    const fh = await S.outDir.getFileHandle(res.name, { create: true });
-    const w = await fh.createWritable(); await w.write(res.bytes); await w.close();
-    return null;
+const canDir = "showDirectoryPicker" in window;
+// ZIP sin compresión (los vídeos y audios ya van comprimidos)
+const CRC = new Uint32Array(256).map((_, n) => { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1; return c; });
+function crc32(u8) { let c = 0xffffffff; for (let i = 0; i < u8.length; i++) c = CRC[(c ^ u8[i]) & 0xff] ^ (c >>> 8); return (c ^ 0xffffffff) >>> 0; }
+function zip(entries) {
+  const enc = new TextEncoder(), parts = [], central = []; let off = 0;
+  const hdr = (sig, n) => { const b = new DataView(new ArrayBuffer(n)); b.setUint32(0, sig, true); return b; };
+  for (const { name, bytes } of entries) {
+    const nm = enc.encode(name), crc = crc32(bytes), h = hdr(0x04034b50, 30);
+    h.setUint16(4, 20, true); h.setUint16(6, 0x800, true); h.setUint32(14, crc, true);
+    h.setUint32(18, bytes.length, true); h.setUint32(22, bytes.length, true); h.setUint16(26, nm.length, true);
+    parts.push(h, nm, bytes);
+    const c = hdr(0x02014b50, 46);
+    c.setUint16(4, 20, true); c.setUint16(6, 20, true); c.setUint16(8, 0x800, true); c.setUint32(16, crc, true);
+    c.setUint32(20, bytes.length, true); c.setUint32(24, bytes.length, true); c.setUint16(28, nm.length, true); c.setUint32(42, off, true);
+    central.push(c, nm);
+    off += 30 + nm.length + bytes.length;
   }
-  const url = URL.createObjectURL(new Blob([res.bytes], { type: res.type }));
-  const a = document.createElement("a"); a.href = url; a.download = res.name; document.body.appendChild(a); a.click(); a.remove();
-  return url;
+  const size = central.reduce((t, x) => t + x.byteLength, 0), e = hdr(0x06054b50, 22);
+  e.setUint16(8, entries.length, true); e.setUint16(10, entries.length, true); e.setUint32(12, size, true); e.setUint32(16, off, true);
+  return new Blob([...parts, ...central, e], { type: "application/zip" });
+}
+function download(blob, name) {
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = name;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 120000);
+}
+const zipName = part => `${S.kind === "video" ? "videos-con-portada" : "audios-con-locucion"}${part > 1 ? "-parte-" + part : ""}.zip`;
+
+// ¿Es la carpeta de los originales? Si hay un fichero con el mismo nombre, tamaño y fecha, sí.
+async function isSourceDir(dir) {
+  for (const f of S.files.slice(0, 20)) {
+    try {
+      const ex = await (await dir.getFileHandle(f.file.name)).getFile();
+      if (ex.size === f.file.size && ex.lastModified === f.file.lastModified) return true;
+    } catch (e) {}
+  }
+  return false;
+}
+async function pickDir() {
+  for (;;) {
+    let dir;
+    try { dir = await window.showDirectoryPicker({ mode: "readwrite", id: "portadas-salida", startIn: "videos" }); }
+    catch (e) { return null; }
+    if (!(await isSourceDir(dir))) return dir;
+    if (!confirm("Esa es la carpeta de los originales y se sobrescribirían. Elige otra carpeta (por ejemplo, crea una nueva dentro).")) return null;
+  }
+}
+async function saveToDir(res) {
+  const fh = await S.outDir.getFileHandle(res.name, { create: true });
+  const w = await fh.createWritable(); await w.write(res.bytes); await w.close();
 }
 
 function updateGo() {
   const noAuthors = !lines($("#d-autores").value).length;
   const ready = S.files.length > 0 && !S.running && !noAuthors && !(S.kind === "audio" && S.voz === "mic" && (!S.rec.entrada || ($("#a-concierre").checked && !S.rec.cierre)));
   $("#go").disabled = !ready;
-  $("#go").textContent = S.files.length ? `Añadir a ${S.files.length === 1 ? "1 fichero" : "los " + S.files.length + " ficheros"}` : "Añadir a todos";
-  const canDir = "showDirectoryPicker" in window;
-  $("#out-dir").hidden = !canDir;
-  $("#out-hint").innerHTML = S.outDir ? `Se guardarán en la carpeta <strong>${esc(S.outDir.name)}</strong>, con el mismo nombre que el original.`
-    : canDir ? "Elige una carpeta de destino (distinta de la de los originales) o, si no, se descargarán uno a uno."
-    : "Se descargarán uno a uno en tu carpeta de descargas, con el mismo nombre que el original.";
+  const n = S.files.length, v = S.kind === "video";
+  $("#go").textContent = !n ? "Generar" : v ? (n === 1 ? "Generar el vídeo con portada" : `Generar los ${n} vídeos con portada`)
+    : (n === 1 ? "Generar el audio con locución" : `Generar los ${n} audios con locución`);
+  $("#out-hint").innerHTML = canDir
+    ? "Al pulsar el botón, elige la carpeta donde guardarlos (distinta de la de los originales). Se guardan con el mismo nombre que el original."
+    : "Al terminar se descargará un ZIP con todos, con el mismo nombre que los originales.";
   if (noAuthors) $("#out-hint").innerHTML += " <strong>Faltan los autores (paso 2).</strong>";
   if (S.kind === "audio" && S.voz === "mic" && S.files.length && !S.rec.entrada) $("#out-hint").innerHTML += " <strong>Falta grabar la locución de entrada (paso 3).</strong>";
 }
 
+function progress(i, p, msg) {
+  const n = S.files.length, total = Math.min(1, (i + Math.min(1, Math.max(0, p || 0))) / n);
+  $("#prog").hidden = false;
+  $("#prog-bar").style.width = (total * 100).toFixed(1) + "%";
+  $("#prog-pct").textContent = Math.floor(total * 100) + " %";
+  $("#prog-txt").textContent = i < n ? `${i + 1} de ${n} · ${S.files[i].file.name}${msg ? " · " + msg : ""}` : msg;
+}
+
 async function go() {
+  // La carpeta se pide antes de nada: el navegador solo deja abrir el diálogo justo al pulsar
+  S.outDir = null;
+  if (canDir) { S.outDir = await pickDir(); if (!S.outDir) return; }
   S.running = true; S.cancel = false; updateGo();
   $("#cancel").hidden = false; $("#summary").innerHTML = "";
-  S.files.forEach((f, i) => { if (f.url) URL.revokeObjectURL(f.url); f.url = null; setState(i, "pend", ""); });
+  S.files.forEach((f, i) => setState(i, "pend", ""));
   const d = data(); saveData();
-  const t0 = Date.now(); let ok = 0, bad = 0, kept = 0;
+  const t0 = Date.now(); let ok = 0, bad = 0;
+  let pending = [], pendingSize = 0, part = 1;
+  const flush = () => { if (pending.length) { download(zip(pending), zipName(part++)); pending = []; pendingSize = 0; } };
+  progress(0, 0, "Preparando el motor…");
   try {
     await getFF();
     for (let i = 0; i < S.files.length && !S.cancel; i++) {
       const f = S.files[i];
-      setState(i, "run", "Empezando…");
+      setState(i, "run", "Empezando…"); progress(i, 0, "Empezando…");
       $(`tr[data-i="${i}"]`)?.scrollIntoView({ block: "nearest" });
       try {
-        const setMsg = (m, p) => setState(i, "run", m, p);
+        let lastP = 0;
+        const setMsg = (m, p) => { if (p != null) lastP = p; setState(i, "run", m, lastP); progress(i, lastP, m); };
         const res = S.kind === "video" ? await processVideo(f, d, setMsg) : await processAudio(f, d, setMsg);
         f.outName = res.name;
-        const url = await save(res);
-        kept += res.bytes.length;
-        // Se guarda el enlace para volver a descargar, salvo que ocupe demasiada memoria
-        if (url && kept < 1.5e9) f.url = url; else if (url) setTimeout(() => URL.revokeObjectURL(url), 60000);
-        setState(i, "ok", res.note); ok++;
+        if (S.outDir) await saveToDir(res);
+        else {
+          // El ZIP se guarda en memoria: si crece demasiado, se descarga por partes
+          pending.push({ name: res.name, bytes: res.bytes }); pendingSize += res.bytes.length;
+          if (pendingSize > 1.2e9) flush();
+        }
+        setState(i, "ok", res.note); ok++; progress(i + 1, 0, "");
       } catch (e) {
         if (S.cancel) { setState(i, "err", "Cancelado"); break; }
         log("ERROR: " + (e && e.message || e)); setState(i, "err", e && e.message || String(e)); bad++;
@@ -727,10 +794,12 @@ async function go() {
   } catch (e) {
     $("#summary").innerHTML = `<div class="callout warn">No se pudo preparar el motor: ${esc(e.message || e)}. Comprueba la conexión y vuelve a intentarlo.</div>`;
   }
+  if (!S.cancel) flush();
   S.running = false; $("#cancel").hidden = true; updateGo();
+  progress(S.files.length, 0, S.cancel ? "Cancelado" : `Terminado: ${ok} de ${S.files.length}`);
   if (ok || bad) $("#summary").innerHTML = `<div class="callout ${bad ? "warn" : "ok"}"><strong>${ok} de ${S.files.length} listos</strong> en ${fmtTime((Date.now() - t0) / 1000)}.
     ${bad ? "Los que han fallado tienen el motivo en la lista; el registro técnico tiene los detalles." : ""}
-    ${S.outDir ? `Están en la carpeta «${esc(S.outDir.name)}».` : "Si el navegador bloqueó alguna descarga, usa los botones «Descargar» de la lista."}
+    ${S.outDir ? `Están en la carpeta «${esc(S.outDir.name)}».` : part > 2 ? `Se han descargado en ${part - 1} ZIP.` : `Se ha descargado <strong>${zipName(1)}</strong>.`}
     Revisa un par antes de subirlos a <a href="tv-urjc.html#pasos">TV URJC</a>.</div>`;
 }
 function cancel() {
@@ -753,7 +822,7 @@ function setVoz(v) {
   S.voz = v;
   $$("[data-voz]").forEach(b => b.setAttribute("aria-pressed", b.dataset.voz === v));
   $$("[data-voz-show]").forEach(el => el.hidden = el.dataset.vozShow !== v);
-  saveData(); updateGo();
+  saveData(); renderSaid(); updateGo();
 }
 async function listen(kind) {
   const st = $("#a-voz-st"), pl = $("#a-player");
@@ -796,20 +865,16 @@ function init() {
     if (id === "d-portitulo") renderList();
     if (id === "d-ia") syncIA();
     if (e.target.dataset.title !== undefined) S.files[+e.target.dataset.title].title = e.target.value;
-    syncSelects(); saveData(); renderPreview(); updateGo();
+    syncSelects(); saveData(); renderPreview(); renderSaid(); updateGo();
   });
   $("#tool").addEventListener("change", e => { if (e.target.id === "d-portitulo" || e.target.id === "a-concierre") { renderList(); updateGo(); } });
   $("#v-portada-img").addEventListener("change", e => loadImg("portada", e.target.files[0]));
   $("#v-cierre-img").addEventListener("change", e => loadImg("cierre", e.target.files[0]));
   $("#f-carpeta").addEventListener("change", e => { addFiles(e.target.files); e.target.value = ""; });
   $("#f-ficheros").addEventListener("change", e => { addFiles(e.target.files); e.target.value = ""; });
-  $("#a-regen").addEventListener("click", () => { refreshTexts(true); saveData(); });
+  $("#a-regen").addEventListener("click", () => { refreshTexts(true); saveData(); renderSaid(); });
   $("#a-escuchar").addEventListener("click", () => listen("entrada"));
   $("#a-escuchar-c").addEventListener("click", () => listen("cierre"));
-  $("#out-dir").addEventListener("click", async () => {
-    try { S.outDir = await window.showDirectoryPicker({ mode: "readwrite", id: "portadas-salida" }); } catch (e) {}
-    updateGo();
-  });
   $("#go").addEventListener("click", go);
   $("#cancel").addEventListener("click", cancel);
   window.addEventListener("beforeunload", e => { if (S.running) { e.preventDefault(); e.returnValue = ""; } });
