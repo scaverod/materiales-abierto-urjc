@@ -765,6 +765,7 @@ async function go() {
   const d = data(); saveData();
   const t0 = Date.now(); let ok = 0, bad = 0;
   let pending = [], pendingSize = 0, part = 1;
+  const used = new Set();   // dos originales pueden dar el mismo nombre (subcarpetas, o clase.mov y clase.mp4)
   const flush = () => { if (pending.length) { download(zip(pending), zipName(part++)); pending = []; pendingSize = 0; } };
   progress(0, 0, "Preparando el motor…");
   try {
@@ -777,6 +778,10 @@ async function go() {
         let lastP = 0;
         const setMsg = (m, p) => { if (p != null) lastP = p; setState(i, "run", m, lastP); progress(i, lastP, m); };
         const res = S.kind === "video" ? await processVideo(f, d, setMsg) : await processAudio(f, d, setMsg);
+        let name = res.name;
+        for (let n = 2; used.has(name.toLowerCase()); n++) name = `${baseOf(res.name)} (${n}).${extOf(res.name)}`;
+        used.add(name.toLowerCase());
+        if (name !== res.name) { res.name = name; res.note = [res.note, `guardado como «${name}»`].filter(Boolean).join(" · "); }
         f.outName = res.name;
         if (S.outDir) await saveToDir(res);
         else {
@@ -794,7 +799,7 @@ async function go() {
   } catch (e) {
     $("#summary").innerHTML = `<div class="callout warn">No se pudo preparar el motor: ${esc(e.message || e)}. Comprueba la conexión y vuelve a intentarlo.</div>`;
   }
-  if (!S.cancel) flush();
+  flush();   // también al cancelar: los que ya estaban hechos se descargan
   S.running = false; $("#cancel").hidden = true; updateGo();
   progress(S.files.length, 0, S.cancel ? "Cancelado" : `Terminado: ${ok} de ${S.files.length}`);
   if (ok || bad) $("#summary").innerHTML = `<div class="callout ${bad ? "warn" : "ok"}"><strong>${ok} de ${S.files.length} listos</strong> en ${fmtTime((Date.now() - t0) / 1000)}.
