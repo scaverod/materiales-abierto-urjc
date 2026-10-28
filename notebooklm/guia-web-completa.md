@@ -470,7 +470,7 @@ Guía · Categorías 4 y 5
 # Subir vídeos y audios a TV URJC
 Los vídeos y podcasts no van en BURJC Digital: van todos en una única serie de TV URJC, que se crea desde el aula virtual. En el libro solo se incluye su lista. YouTube no vale.
  Procedimiento oficial (con capturas) Vídeo de ayuda al depósito
-Antes de grabar¿Ya tienes los vídeos?Subida en 8 pasosDespués de subirDudas típicas
+Antes de grabar¿Ya tienes los vídeos o audios?Subida en 8 pasosDespués de subirDudas típicas
 
 ## Antes de subir: prepara el vídeo
 
@@ -488,12 +488,11 @@ Antes de grabar¿Ya tienes los vídeos?Subida en 8 pasosDespués de subirDudas t
 - Si usaste IA generativa, la declaración va justo después de la cortinilla inicial, visible unos segundos.
 Para que puntúen: cada vídeo debe explicar un tema concreto, no ser una clase grabada entera. Con 10 vídeos específicos que cubran la mitad del temario llegas a 5 puntos; con 20 que cubran el 90 %, a 8; y para 14 tienen que cubrir la asignatura de forma prácticamente completa y destacar en detalle y utilidad. Los audios siguen la misma escala, y no cuentan si solo leen textos que ya están en otras categorías.
 
-## ¿Ya tienes los vídeos grabados? Añade la portada a todos de una vez
-No hace falta editarlos uno a uno. Con la herramienta Portadas y locuciones de esta web (portadas.html) eliges la carpeta de vídeos y la web les pone delante la portada (generada con tus datos o con tu propia imagen), la declaración de IA si la necesitas y, al final, los créditos con la nota de copyright. No hay que instalar nada: funciona en el navegador, en Windows, Mac y Linux, y los vídeos no salen de tu ordenador.
+## ¿Ya tienes los vídeos o audios grabados? Añade la entrada y el cierre a todos de una vez
+No hace falta editarlos uno a uno. Con la herramienta Portadas y locuciones de esta web (portadas.html) eliges la carpeta y la web añade a todos los ficheros lo que pide la convocatoria al principio y al final. No hay que instalar nada: funciona en el navegador, en Windows, Mac y Linux, y los ficheros no salen de tu ordenador.
 
-- La portada puede llevar el título de cada vídeo, sacado del nombre del fichero, o uno común.
-- Con vídeos MP4 normales (H.264) tarda unos segundos por vídeo y no recodifica el original, así que no pierde calidad.
-- También vale para los audios: añade la locución de entrada y de cierre, grabada con tu voz o leída por una voz sintética.
+- Vídeos: delante, la portada (generada con tus datos o con tu propia imagen) y la declaración de IA si la necesitas; al final, los créditos con la nota de copyright. La portada puede llevar el título de cada vídeo, sacado del nombre del fichero, o uno común. Con vídeos MP4 normales (H.264) tarda unos segundos por vídeo y no recodifica el original, así que no pierde calidad.
+- Audios: la locución de entrada con los datos y la licencia, y la de cierre con la licencia detallada, grabadas con tu voz o leídas por una voz sintética con el título de cada audio.
 
 ## La subida, en 8 pasos
 Todo se hace desde el Aula Virtual, con el recurso TV URJC. Así los vídeos quedan en una serie ligada a la asignatura.
