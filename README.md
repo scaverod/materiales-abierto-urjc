@@ -70,7 +70,9 @@ Desde 2026-27, todo el material bibliográfico va en **un único depósito** de 
 ├── assets/
 │   ├── app.js                    # Cabecera, menú, pie, tema, copiar, cuentas atrás
 │   ├── style.css                 # Estilos (modo claro/oscuro, responsive)
-│   └── img/                      # Favicon y logos
+│   ├── portadas.js               # Herramienta de portadas y locuciones (ffmpeg.wasm + Piper)
+│   ├── vendor/ffmpeg/            # Envoltorio de ffmpeg.wasm (el núcleo se descarga de jsDelivr)
+│   └── img/                      # Favicon, logos y emblemas CC
 ├── plantilla-libro-latex/        # Fuente de la plantilla del libro
 ├── descargas/                    # ZIP de la plantilla, PDF de ejemplo, convocatoria y Anexo V
 ├── build.sh                      # Regenera descargas/ a partir de la plantilla
@@ -101,17 +103,21 @@ Si cambias la plantilla del libro, regenera las descargas (necesita `zip` y, de 
 | La lista de mentores | `mentores.html` (array `M`) |
 | Las fechas del calendario y del `.ics` | `calendario.html` (array `EVENTS`) |
 | Las cuentas atrás de la portada | `index.html` (atributos `data-countdown`) |
+| El diseño de las portadas y los créditos de los vídeos | `assets/portadas.js` (función `drawSlide`) |
+| Los textos de las locuciones y las voces sintéticas | `assets/portadas.js` (`defaultTexts` y `VOICES`) |
 
 ### Para la próxima convocatoria
 
 1. Actualiza las fechas en `index.html` y `calendario.html` y los textos de novedades.
 2. Revisa la rúbrica en `categorias.html` y los requisitos del libro en `libro.html`.
-3. Cambia las claves de almacenamiento (`checklist-2027`, `calc-2027`, `textos-2027`) para que nadie arrastre el progreso del año anterior.
+3. Cambia las claves de almacenamiento (`checklist-2027`, `calc-2027`, `textos-2027`, `portadas-2027`) para que nadie arrastre el progreso del año anterior.
 4. Sustituye `descargas/convocatoria-2026-2027.pdf` por la nueva convocatoria.
 
 ## Privacidad
 
-La web no usa cookies, analítica ni servidor. El progreso del checklist, la calculadora y los datos del generador de textos se guardan solo en el `localStorage` de tu navegador y nunca salen de él.
+La web no usa cookies, analítica ni servidor. El progreso del checklist, la calculadora y los datos del generador de textos y de las portadas se guardan solo en el `localStorage` de tu navegador y nunca salen de él.
+
+La herramienta de portadas y locuciones procesa los vídeos y audios en tu propio navegador: **los ficheros no se suben a ningún sitio**. Lo único que descarga, la primera vez, es el motor de vídeo ([jsDelivr](https://www.jsdelivr.com/)) y, si eliges voz sintética, el modelo de voz ([Hugging Face](https://huggingface.co/rhasspy/piper-voices)) y su motor ([cdnjs](https://cdnjs.com/) y jsDelivr); después quedan en la caché del navegador.
 
 ## Contribuir
 
