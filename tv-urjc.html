@@ -35,34 +35,13 @@
   <div class="callout tip"><strong>Para que puntúen:</strong> cada vídeo debe explicar un tema concreto, no ser una clase grabada entera. Con 10 vídeos específicos que cubran la mitad del temario llegas a 5 puntos; con 20 que cubran el 90 %, a 8; y para 14 tienen que cubrir la asignatura de forma prácticamente completa y destacar en detalle y utilidad. Los audios siguen la misma escala, y no cuentan si solo leen textos que ya están en otras categorías.</div>
 
   <h2 id="ya-grabados">¿Ya tienes los vídeos grabados? Añade la portada a todos de una vez</h2>
-  <p>Si tus vídeos ya están hechos, no hace falta editarlos uno a uno. Con <a href="https://github.com/scaverod/Batch-Video-Intro-Adder" target="_blank" rel="noopener"><strong>Batch Video Intro Adder</strong></a>, una aplicación que he desarrollado para esto, pones una imagen de portada al principio de <strong>todos los vídeos de una carpeta</strong> con un solo comando. Mantiene el formato y la calidad originales y funciona con MP4, MKV, MOV, AVI, WMV, FLV y WebM.</p>
-  <div class="card">
-    <ol style="margin:0;padding-left:1.2em">
-      <li><strong>Diseña la portada</strong> como una diapositiva de 16:9 (1920×1080) y expórtala como PNG o JPG. Pon los datos de la cortinilla: título, autores, fecha, «Material docente en abierto de la Universidad Rey Juan Carlos», asignatura y grado, TV URJC y logo de la licencia. Si añades la nota de copyright completa, lo tienes todo en una sola imagen.</li>
-      <li><strong>Instala los requisitos:</strong> Python 3 y <a href="https://ffmpeg.org/download.html" target="_blank" rel="noopener">FFmpeg</a>. En Mac, <code>brew install ffmpeg</code>.</li>
-      <li><strong>Descarga la aplicación y sus dependencias:</strong>
-<pre id="bvia-install">git clone https://github.com/scaverod/Batch-Video-Intro-Adder.git
-cd Batch-Video-Intro-Adder
-pip install -r requirements.txt</pre></li>
-      <li><strong>Ejecútala</strong> indicando la carpeta de vídeos, la imagen y la carpeta de salida. <code>-d</code> es la duración de la portada en segundos (5 por defecto):
-<pre id="bvia-run">python main.py mis_videos portada.png videos_con_portada -d 5</pre></li>
-      <li>Revisa un par de vídeos de <code>videos_con_portada/</code> y súbelos a TV URJC siguiendo los pasos de abajo.</li>
-    </ol>
-    <div class="btn-row" style="margin-bottom:0">
-      <a class="btn btn-primary btn-sm" href="https://github.com/scaverod/Batch-Video-Intro-Adder" target="_blank" rel="noopener">Ver en GitHub</a>
-      <button class="btn btn-sm" data-copy="bvia-install">Copiar instalación</button>
-      <button class="btn btn-sm" data-copy="bvia-run">Copiar comando</button>
-    </div>
-  </div>
-  <div class="callout info">
-    <strong>Trucos:</strong>
-    <ul style="margin:.4em 0 0">
-      <li>Usa una imagen con la <strong>misma proporción que los vídeos</strong>. Si no, se estira para ajustarse.</li>
-      <li>¿Has usado IA? Pásala <strong>dos veces</strong>: primero con la imagen de la declaración de IA y después, sobre el resultado, con la portada. Así quedan la portada, la declaración y el vídeo, en el orden que pide la convocatoria.</li>
-      <li>Los vídeos que ya están en la carpeta de salida se saltan, así que puedes relanzarla si se corta.</li>
-      <li>La portada tiene que llevar un título. Si usas una común, pon el de la colección (por ejemplo, «Vídeos de la asignatura X»). Si prefieres el título de cada vídeo, crea una imagen por vídeo y ejecuta la aplicación con una carpeta por vídeo.</li>
-    </ul>
-  </div>
+  <p>No hace falta editarlos uno a uno. Con la herramienta <a href="portadas.html"><strong>Portadas y locuciones</strong></a> eliges la carpeta de vídeos y la web les pone delante la portada (generada con tus datos o con tu propia imagen), la declaración de IA si la necesitas y, al final, los créditos con la nota de copyright. No hay que instalar nada: funciona en el navegador, en Windows, Mac y Linux, y los vídeos no salen de tu ordenador.</p>
+  <ul>
+    <li>La portada puede llevar el <strong>título de cada vídeo</strong>, sacado del nombre del fichero, o uno común.</li>
+    <li>Con vídeos MP4 normales (H.264) tarda unos segundos por vídeo y <strong>no recodifica el original</strong>, así que no pierde calidad.</li>
+    <li>También vale para los <strong>audios</strong>: añade la locución de entrada y de cierre, grabada con tu voz o leída por una voz sintética.</li>
+  </ul>
+  <div class="btn-row"><a class="btn btn-primary" href="portadas.html">Abrir la herramienta →</a></div>
 
   <h2 id="pasos">La subida, en 8 pasos</h2>
   <p>Todo se hace desde el <strong>Aula Virtual</strong>, con el recurso TV URJC. Así los vídeos quedan en una serie ligada a la asignatura.</p>

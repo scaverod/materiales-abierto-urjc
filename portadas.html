@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portadas y locuciones</title>
+<meta name="description" content="Añade la cortinilla inicial y los créditos finales a todos tus vídeos, o la locución de entrada y cierre a todos tus audios, sin instalar nada. Todo se hace en tu ordenador.">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header id="site-header"></header>
+<main>
+<div class="wrap">
+  <p class="eyebrow">Herramienta · Categorías 4 y 5</p>
+  <h1>Portadas para vídeos y locuciones para audios</h1>
+  <p class="lead">Elige la carpeta con tus vídeos o audios y la web les pone delante la portada (o la locución) con los datos que pide la convocatoria y, al final, los créditos con la licencia. Todo a la vez y sin instalar nada.</p>
+  <div class="callout info"><strong>Tus ficheros no salen de tu ordenador.</strong> Todo se procesa en el navegador, en Windows, Mac o Linux, con Chrome, Edge, Firefox o Safari. La primera vez se descarga el motor de vídeo (unos 32 MB) y, si eliges voz sintética, la voz (de 60 a 75 MB); las siguientes veces ya no hace falta.</div>
+
+  <div class="tool" id="tool">
+    <!-- 1. Tipo -->
+    <section class="card tool-step">
+      <h2><span class="tool-n">1</span> ¿Qué quieres preparar?</h2>
+      <div class="seg" role="group" aria-label="Tipo de ficheros">
+        <button type="button" data-kind="video" aria-pressed="true">🎬 Vídeos</button>
+        <button type="button" data-kind="audio" aria-pressed="false">🎙️ Audios</button>
+      </div>
+      <p class="tool-hint" data-show="video">Al principio, una portada de unos segundos con los datos y la licencia; justo después, la declaración de IA si la hay; al final, los créditos con la nota de copyright.</p>
+      <p class="tool-hint" data-show="audio" hidden>Al principio, una locución con los datos y la licencia (y la declaración de IA si la hay); al final, otra con la licencia detallada.</p>
+    </section>
+
+    <!-- 2. Datos -->
+    <section class="card tool-step">
+      <h2><span class="tool-n">2</span> Tus datos</h2>
+      <p class="tool-hint" id="datos-origen">Si ya rellenaste <a href="textos.html">Textos listos</a>, los datos aparecen aquí solos.</p>
+      <div class="grid grid-2 tool-fields">
+        <div class="field"><label for="d-coleccion">Título común</label>
+          <input type="text" id="d-coleccion" placeholder="Vídeos de la asignatura Estructuras de Datos">
+          <label class="tool-check"><input type="checkbox" id="d-portitulo" checked> Usar un título distinto en cada fichero, sacado de su nombre (lo puedes cambiar en la lista)</label></div>
+        <div class="field"><label for="d-autores">Autores (uno por línea)</label>
+          <textarea id="d-autores" rows="2" placeholder="Nombre Apellido Apellido"></textarea></div>
+        <div class="field"><label for="d-asig">Asignatura</label><input type="text" id="d-asig" placeholder="Estructuras de Datos"></div>
+        <div class="field"><label for="d-grados">Grado(s) (uno por línea)</label>
+          <textarea id="d-grados" rows="2" placeholder="Grado en Ingeniería del Software"></textarea></div>
+        <div class="field"><label for="d-fecha">Fecha</label><input type="text" id="d-fecha"></div>
+        <div class="grid grid-2" style="gap:10px">
+          <div class="field"><label for="d-anio">Año del copyright</label><input type="number" id="d-anio"></div>
+          <div class="field"><label for="d-lic">Licencia</label><select id="d-lic"><option value="by-sa">CC BY-SA 4.0</option><option value="by">CC BY 4.0</option></select></div>
+        </div>
+        <div class="field"><label for="d-serie">Serie de TV URJC</label><input type="url" id="d-serie" placeholder="https://tv.urjc.es/series/…"><small>Si aún no la tienes, se pone «tv.urjc.es».</small></div>
+        <div class="field"><label for="d-ia">Uso de IA generativa (una línea por uso; vacío si no hay)</label>
+          <textarea id="d-ia" rows="2" placeholder="Avatar generado con IA en los vídeos del tema 3"></textarea>
+          <small>Solo si el contenido de los vídeos o audios se ha hecho con IA. Se añade justo después de la portada, como pide la convocatoria.</small></div>
+      </div>
+    </section>
+
+    <!-- 3a. Portada (vídeo) -->
+    <section class="card tool-step" data-show="video">
+      <h2><span class="tool-n">3</span> Portada, declaración de IA y créditos</h2>
+      <div class="grid grid-2">
+        <div>
+          <div class="field"><label for="v-portada">Portada</label>
+            <select id="v-portada"><option value="gen">Generarla con mis datos</option><option value="img">Usar mi imagen</option></select></div>
+          <div class="field" id="v-portada-img-f" hidden><label for="v-portada-img">Imagen de la portada (PNG o JPG)</label><input type="file" id="v-portada-img" accept="image/*">
+            <small>Si no tiene la proporción del vídeo, se encaja con bandas negras, sin deformarla.</small></div>
+          <div class="field"><label for="v-cierre">Créditos finales</label>
+            <select id="v-cierre"><option value="gen">Generarlos con la nota de copyright</option><option value="img">Usar mi imagen</option><option value="no">No añadir créditos</option></select></div>
+          <div class="field" id="v-cierre-img-f" hidden><label for="v-cierre-img">Imagen de los créditos</label><input type="file" id="v-cierre-img" accept="image/*"></div>
+          <label class="tool-check"><input type="checkbox" id="v-ia"> Añadir la declaración de IA justo después de la portada</label>
+          <div class="grid grid-3 tool-durs">
+            <div class="field"><label for="v-d-portada">Portada (s)</label><input type="number" id="v-d-portada" min="1" max="30" value="5"></div>
+            <div class="field"><label for="v-d-ia">Declaración IA (s)</label><input type="number" id="v-d-ia" min="1" max="30" value="6"></div>
+            <div class="field"><label for="v-d-cierre">Créditos (s)</label><input type="number" id="v-d-cierre" min="1" max="30" value="6"></div>
+          </div>
+        </div>
+        <div>
+          <div class="seg seg-sm" role="group" aria-label="Vista previa">
+            <button type="button" data-prev="portada" aria-pressed="true">Portada</button>
+            <button type="button" data-prev="ia" aria-pressed="false">Declaración IA</button>
+            <button type="button" data-prev="cierre" aria-pressed="false">Créditos</button>
+          </div>
+          <canvas id="preview" class="tool-preview" width="1920" height="1080" aria-label="Vista previa"></canvas>
+          <p class="tool-hint" id="preview-note">Vista previa con el primer fichero de la lista.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3b. Locución (audio) -->
+    <section class="card tool-step" data-show="audio" hidden>
+      <h2><span class="tool-n">3</span> Locución de entrada y de cierre</h2>
+      <div class="seg" role="group" aria-label="Voz">
+        <button type="button" data-voz="sint" aria-pressed="true">🤖 Que lo lea una voz sintética</button>
+        <button type="button" data-voz="mic" aria-pressed="false">🎤 Grabarlo con mi voz</button>
+      </div>
+      <div class="grid grid-2" style="margin-top:14px">
+        <div class="field"><label for="a-entrada">Texto de entrada</label>
+          <textarea id="a-entrada" rows="7"></textarea>
+          <small data-voz-show="sint"><code>{titulo}</code> se cambia por el título de cada audio.</small>
+          <small data-voz-show="mic" hidden>Se graba una sola vez y se usa en todos los audios, así que di el título común.</small></div>
+        <div class="field"><label for="a-cierre">Texto de cierre</label>
+          <textarea id="a-cierre" rows="7"></textarea>
+          <label class="tool-check"><input type="checkbox" id="a-concierre" checked> Añadir la locución de cierre</label></div>
+      </div>
+      <div class="btn-row" style="margin-top:0"><button type="button" class="btn btn-sm" id="a-regen">Rehacer los textos con mis datos</button></div>
+
+      <div data-voz-show="sint">
+        <div class="field" style="max-width:420px"><label for="a-voz">Voz</label>
+          <select id="a-voz">
+            <option value="davefx">Masculina · España (63 MB)</option>
+            <option value="sharvard-F">Femenina · España (77 MB)</option>
+            <option value="sharvard-M">Masculina 2 · España (77 MB)</option>
+            <option value="claude-mx">Masculina · México (63 MB)</option>
+          </select></div>
+        <div class="btn-row"><button type="button" class="btn btn-sm" id="a-escuchar">▶ Escuchar la entrada</button><button type="button" class="btn btn-sm" id="a-escuchar-c">▶ Escuchar el cierre</button><span class="tool-status" id="a-voz-st"></span></div>
+        <audio id="a-player" controls hidden></audio>
+      </div>
+
+      <div data-voz-show="mic" hidden>
+        <div class="grid grid-2">
+          <div class="rec" data-rec="entrada"><h3>Entrada</h3>
+            <div class="btn-row"><button type="button" class="btn btn-sm btn-primary" data-act="rec">● Grabar</button><button type="button" class="btn btn-sm" data-act="stop" disabled>■ Parar</button><span class="tool-status"></span></div>
+            <audio controls hidden></audio></div>
+          <div class="rec" data-rec="cierre"><h3>Cierre</h3>
+            <div class="btn-row"><button type="button" class="btn btn-sm btn-primary" data-act="rec">● Grabar</button><button type="button" class="btn btn-sm" data-act="stop" disabled>■ Parar</button><span class="tool-status"></span></div>
+            <audio controls hidden></audio></div>
+        </div>
+        <p class="tool-hint">Lee el texto de arriba. El volumen se iguala solo. Si prefieres grabarlo con otro programa, guárdalo y súbelo aquí: <label class="btn btn-sm">Subir entrada<input type="file" accept="audio/*" data-upload="entrada" hidden></label> <label class="btn btn-sm">Subir cierre<input type="file" accept="audio/*" data-upload="cierre" hidden></label></p>
+      </div>
+    </section>
+
+    <!-- 4. Ficheros -->
+    <section class="card tool-step">
+      <h2><span class="tool-n">4</span> Tus ficheros</h2>
+      <div class="btn-row" style="margin-top:0">
+        <label class="btn btn-primary">📁 Elegir una carpeta<input type="file" id="f-carpeta" webkitdirectory multiple hidden></label>
+        <label class="btn">o elegir ficheros sueltos<input type="file" id="f-ficheros" multiple hidden></label>
+      </div>
+      <div id="f-lista"><p class="tool-hint">Todavía no has elegido ficheros.</p></div>
+    </section>
+
+    <!-- 5. Generar -->
+    <section class="card tool-step">
+      <h2><span class="tool-n">5</span> Generar</h2>
+      <p class="tool-hint" id="out-hint"></p>
+      <div class="btn-row">
+        <button type="button" class="btn" id="out-dir" hidden>📂 Elegir carpeta de destino</button>
+        <button type="button" class="btn btn-primary" id="go" disabled>Añadir a todos</button>
+        <button type="button" class="btn" id="cancel" hidden>Cancelar</button>
+      </div>
+      <div id="engine" class="tool-status"></div>
+      <div id="summary"></div>
+      <details class="tool-log"><summary>Registro técnico (por si algo falla)</summary><div><pre id="log"></pre></div></details>
+    </section>
+  </div>
+
+  <h2>Preguntas frecuentes</h2>
+  <details><summary>¿Cuánto tarda?</summary><div><p>Con vídeos MP4 normales (H.264), los de Zoom, Teams, OBS, Camtasia, PowerPoint o la mayoría de cámaras, unos segundos por vídeo: solo se genera la portada y se pega delante sin tocar el resto, así que no se pierde calidad. Si el vídeo está en otro formato (por ejemplo, HEVC de iPhone o AVI), hay que recodificarlo entero y tarda bastante más, aproximadamente lo que dura el vídeo o más. La herramienta te avisa en cada fichero.</p></div></details>
+  <details><summary>¿Dónde se guardan los resultados?</summary><div><p>En Chrome y Edge puedes elegir una carpeta de destino y se guardan ahí con el mismo nombre. En Firefox y Safari se descargan uno a uno a tu carpeta de descargas. Los originales no se tocan. Elige siempre una carpeta distinta de la de los originales.</p></div></details>
+  <details><summary>¿Hay un límite de tamaño?</summary><div><p>El navegador tiene que guardar en memoria el fichero resultante, así que con vídeos de más de 2 GB puede fallar. Si te pasa, divídelos o expórtalos con menos resolución (1080p es suficiente).</p></div></details>
+  <details><summary>¿Qué datos tiene que llevar la portada?</summary><div><p>Título, autores y fecha; «Material docente en abierto de la Universidad Rey Juan Carlos»; asignatura(s) y grado(s); el lugar de depósito (TV URJC, con el enlace) y el logo de la licencia. Al final, la nota de copyright completa. La portada generada ya lo lleva todo. Si usas tu propia imagen, asegúrate de que también. <a href="tv-urjc.html#antes">Más detalles</a>.</p></div></details>
+  <details><summary>Los audios: ¿voz sintética o mi voz?</summary><div><p>Las dos valen. Grabar tu voz queda más natural; la voz sintética es más cómoda porque lee el título de cada audio. Solo se usa en la entrada y el cierre, no en el contenido del audio.</p></div></details>
+</div>
+</main>
+<footer id="site-footer"></footer>
+<script src="assets/app.js"></script>
+<script type="module" src="assets/portadas.js"></script>
+</body>
+</html>

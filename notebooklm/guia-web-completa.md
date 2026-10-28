@@ -90,6 +90,9 @@ Un plan semana a semana hasta el depósito, con exportación de las fechas a tu 
 ### 🎬 Subir vídeos a TV URJC
 Los 8 pasos desde el aula virtual: serie con el nombre exacto, metadatos y licencia.
 
+### 🎞 Portadas y locuciones
+Añade la portada y los créditos a todos tus vídeos, o la locución a todos tus audios, sin instalar nada.
+
 ### 💾 Depositar el código
 De GitHub a Software Heritage y al depósito de BURJC, sin caer en los errores típicos.
 
@@ -486,30 +489,11 @@ Antes de grabar¿Ya tienes los vídeos?Subida en 8 pasosDespués de subirDudas t
 Para que puntúen: cada vídeo debe explicar un tema concreto, no ser una clase grabada entera. Con 10 vídeos específicos que cubran la mitad del temario llegas a 5 puntos; con 20 que cubran el 90 %, a 8; y para 14 tienen que cubrir la asignatura de forma prácticamente completa y destacar en detalle y utilidad. Los audios siguen la misma escala, y no cuentan si solo leen textos que ya están en otras categorías.
 
 ## ¿Ya tienes los vídeos grabados? Añade la portada a todos de una vez
-Si tus vídeos ya están hechos, no hace falta editarlos uno a uno. Con Batch Video Intro Adder, una aplicación que he desarrollado para esto, pones una imagen de portada al principio de todos los vídeos de una carpeta con un solo comando. Mantiene el formato y la calidad originales y funciona con MP4, MKV, MOV, AVI, WMV, FLV y WebM.
+No hace falta editarlos uno a uno. Con la herramienta Portadas y locuciones de esta web (portadas.html) eliges la carpeta de vídeos y la web les pone delante la portada (generada con tus datos o con tu propia imagen), la declaración de IA si la necesitas y, al final, los créditos con la nota de copyright. No hay que instalar nada: funciona en el navegador, en Windows, Mac y Linux, y los vídeos no salen de tu ordenador.
 
-- Diseña la portada como una diapositiva de 16:9 (1920×1080) y expórtala como PNG o JPG. Pon los datos de la cortinilla: título, autores, fecha, «Material docente en abierto de la Universidad Rey Juan Carlos», asignatura y grado, TV URJC y logo de la licencia. Si añades la nota de copyright completa, lo tienes todo en una sola imagen.
-- Instala los requisitos: Python 3 y FFmpeg. En Mac, brew install ffmpeg.
-- Descarga la aplicación y sus dependencias:
-```
-git clone https://github.com/scaverod/Batch-Video-Intro-Adder.git
-cd Batch-Video-Intro-Adder
-pip install -r requirements.txt
-```
-
-- Ejecútala indicando la carpeta de vídeos, la imagen y la carpeta de salida. -d es la duración de la portada en segundos (5 por defecto):
-```
-python main.py mis_videos portada.png videos_con_portada -d 5
-```
-
-- Revisa un par de vídeos de videos_con_portada/ y súbelos a TV URJC siguiendo los pasos de abajo.
- Ver en GitHub Copiar instalación Copiar comando
- Trucos:
-
-- Usa una imagen con la misma proporción que los vídeos. Si no, se estira para ajustarse.
-- ¿Has usado IA? Pásala dos veces: primero con la imagen de la declaración de IA y después, sobre el resultado, con la portada. Así quedan la portada, la declaración y el vídeo, en el orden que pide la convocatoria.
-- Los vídeos que ya están en la carpeta de salida se saltan, así que puedes relanzarla si se corta.
-- La portada tiene que llevar un título. Si usas una común, pon el de la colección (por ejemplo, «Vídeos de la asignatura X»). Si prefieres el título de cada vídeo, crea una imagen por vídeo y ejecuta la aplicación con una carpeta por vídeo.
+- La portada puede llevar el título de cada vídeo, sacado del nombre del fichero, o uno común.
+- Con vídeos MP4 normales (H.264) tarda unos segundos por vídeo y no recodifica el original, así que no pierde calidad.
+- También vale para los audios: añade la locución de entrada y de cierre, grabada con tu voz o leída por una voz sintética.
 
 ## La subida, en 8 pasos
 Todo se hace desde el Aula Virtual, con el recurso TV URJC. Así los vídeos quedan en una serie ligada a la asignatura.
@@ -585,6 +569,29 @@ No cuentan. Descárgalos, añade la cortinilla y la licencia, y súbelos a TV UR
 ¿Puedo usar voz o avatar generados con IA?
 
 Sí, pero hay que declararlo después de la cortinilla. Un vídeo generado automáticamente a partir de tus apuntes puntúa la mitad y no cuenta para llegar a los 28 puntos.
+
+
+---
+
+# Página: Portadas y locuciones
+URL: https://scaverod.github.io/materiales-abierto-urjc/portadas.html
+
+# Portadas para vídeos y locuciones para audios
+Elige la carpeta con tus vídeos o audios y la web les pone delante la portada (o la locución) con los datos que pide la convocatoria y, al final, los créditos con la licencia. Todo a la vez y sin instalar nada.
+
+Tus ficheros no salen de tu ordenador. Todo se procesa en el navegador, en Windows, Mac o Linux, con Chrome, Edge, Firefox o Safari. La primera vez se descarga el motor de vídeo (unos 32 MB) y, si eliges voz sintética, la voz (de 60 a 75 MB); las siguientes veces ya no hace falta.
+
+## Cómo se usa
+1. Elige si vas a preparar vídeos o audios.
+2. Revisa tus datos: título común (o un título por fichero, sacado de su nombre), autores, asignatura, grados, fecha, año, licencia, serie de TV URJC y, si el contenido se ha hecho con IA, los usos de IA. Si rellenaste Textos listos, aparecen solos.
+3. Vídeos: elige la portada (generada con tus datos o tu propia imagen), los créditos finales (generados con la nota de copyright, tu imagen o ninguno), si añadir la declaración de IA tras la portada y cuántos segundos dura cada cosa. Hay vista previa. Audios: revisa los textos de entrada y cierre, y elige si los lee una voz sintética (cuatro voces en español) o los grabas con tu micrófono (o subes una grabación).
+4. Elige la carpeta (o los ficheros sueltos).
+5. Pulsa «Añadir a todos». En Chrome y Edge puedes elegir una carpeta de destino; en Firefox y Safari se descargan uno a uno.
+
+## Preguntas frecuentes
+- ¿Cuánto tarda? Con vídeos MP4 normales (H.264), los de Zoom, Teams, OBS, Camtasia, PowerPoint o la mayoría de cámaras, unos segundos por vídeo: solo se genera la portada y se pega delante sin tocar el resto, así que no se pierde calidad. Si el vídeo está en otro formato (por ejemplo, HEVC de iPhone o AVI), hay que recodificarlo entero y tarda bastante más.
+- ¿Hay un límite de tamaño? Con vídeos de más de 2 GB puede fallar. Si te pasa, divídelos o expórtalos con menos resolución (1080p es suficiente).
+- Los audios: ¿voz sintética o mi voz? Las dos valen. Grabar tu voz queda más natural; la voz sintética es más cómoda porque lee el título de cada audio. Solo se usa en la entrada y el cierre, no en el contenido del audio.
 
 
 ---

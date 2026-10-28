@@ -369,3 +369,36 @@ details > div p:first-child { margin-top: 0; }
 }
 .deadline .count a { color: inherit; }
 .deadline-link { display: inline-block; margin-top: 8px; font-size: .88rem; font-weight: 700; }
+
+/* ---------- Herramienta de portadas y locuciones ---------- */
+.tool { display: grid; gap: 14px; margin: 22px 0 34px; }
+.tool > *, .tool .grid > * { min-width: 0; }
+.tool-step h2 { margin: 0 0 12px; font-size: 1.2rem; display: flex; align-items: center; gap: 10px; }
+.tool-n { width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff; display: inline-grid; place-items: center; font-size: .88rem; font-weight: 800; flex-shrink: 0; }
+.tool-hint { color: var(--muted); font-size: .92rem; margin: 10px 0 0; }
+.tool-fields { gap: 0 18px; align-items: start; }
+.tool .field { align-content: start; }
+.tool-check { display: flex; gap: 8px; align-items: flex-start; font-weight: 500 !important; font-size: .9rem; margin: 8px 0; cursor: pointer; }
+.tool-check input { width: 17px; height: 17px; margin: 2px 0 0; accent-color: var(--accent); flex-shrink: 0; }
+.tool-durs { gap: 10px; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: end; }
+.tool-durs label { font-size: .8rem !important; }
+.seg-sm button { font-size: .8rem; padding: 5px 10px; }
+.tool .seg { flex-wrap: wrap; }
+.tool-preview { display: block; width: 100%; height: auto; margin-top: 10px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface-2); }
+.tool-table td { vertical-align: middle; }
+.tool-table input[type="text"] { min-width: 180px; padding: 6px 8px; font-size: .9rem; }
+.tool-table input:disabled { opacity: .55; }
+.tool-fname { overflow-wrap: anywhere; min-width: 140px; }
+.tool-fname small, .tool-state small { display: block; color: var(--muted); font-size: .8rem; }
+.tool-state { min-width: 150px; font-size: .9rem; }
+.tool-state[data-state="ok"] > span { color: var(--ok); font-weight: 700; }
+.tool-state[data-state="err"] > span { color: var(--accent-text); font-weight: 700; }
+.tool-state .btn { margin-top: 4px; }
+.tool-bar { height: 6px; background: var(--surface-2); border-radius: 99px; overflow: hidden; margin-top: 4px; }
+.tool-bar > div { height: 100%; background: var(--accent); transition: width .3s; }
+.tool-status { color: var(--muted); font-size: .9rem; align-self: center; }
+#engine:empty { display: none; }
+.tool-log { margin-top: 12px; }
+.tool-log pre { max-height: 260px; overflow: auto; font-size: .75rem; }
+.rec h3 { margin: 0; font-size: 1rem; }
+.rec audio, #a-player { width: 100%; margin-top: 4px; }

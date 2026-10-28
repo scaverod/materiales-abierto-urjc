@@ -8,6 +8,7 @@
     ["Guías", [
       ["libro.html", "El libro de la asignatura", "Monta el único PDF del depósito"],
       ["tv-urjc.html", "Subir vídeos a TV URJC", "Serie, metadatos y licencia, paso a paso"],
+      ["portadas.html", "Portadas y locuciones", "Portada y créditos para todos tus vídeos y audios"],
       ["software.html", "Depositar el código", "GitHub → Software Heritage → BURJC"],
       ["textos.html", "Textos listos", "Copyright, metadatos, Anexo V, IA…"],
     ]],
