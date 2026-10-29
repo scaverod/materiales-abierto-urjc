@@ -651,6 +651,7 @@ function addFiles(list) {
   const skipped = list.length - files.length;
   files.sort((a, b) => (a.webkitRelativePath || a.name).localeCompare(b.webkitRelativePath || b.name, "es", { numeric: true }));
   S.files = files.map(file => ({ file, title: titleFromName(file.name), state: "pend", msg: "" }));
+  if (!S.running) clearResults();
   renderList(skipped);
   renderPreview(); renderSaid(); updateGo();
 }
@@ -747,6 +748,8 @@ function updateGo() {
   if (S.kind === "audio" && S.voz === "mic" && S.files.length && !S.rec.entrada) $("#out-hint").innerHTML += " <strong>Falta grabar la locución de entrada (paso 3).</strong>";
 }
 
+// Al cambiar de tipo o de ficheros, el progreso y el resumen de la tanda anterior ya no valen
+function clearResults() { $("#prog").hidden = true; $("#summary").innerHTML = ""; }
 function progress(i, p, msg) {
   const n = S.files.length, total = Math.min(1, (i + Math.min(1, Math.max(0, p || 0))) / n);
   $("#prog").hidden = false;
@@ -816,6 +819,7 @@ function cancel() {
 /* ---------- Interfaz ---------- */
 function setKind(k) {
   if (S.running) return;
+  if (k !== S.kind) clearResults();
   S.kind = k;
   $$("[data-kind]").forEach(b => b.setAttribute("aria-pressed", b.dataset.kind === k));
   $$("[data-show]").forEach(el => el.hidden = el.dataset.show !== k);
